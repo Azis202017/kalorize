@@ -4,6 +4,8 @@ import 'package:kalorize/app/services/auth_service.dart';
 import 'package:kalorize/app/services/input/login_input.dart';
 import 'package:kalorize/app/shared/theme/color.dart';
 
+import '../../../routes/app_pages.dart';
+
 class LoginController extends GetxController {
   TextEditingController emailEditingController = TextEditingController();
   TextEditingController passwordEditingController = TextEditingController();
@@ -49,5 +51,8 @@ class LoginController extends GetxController {
         backgroundColor: error,
       );
     }
+  }
+  void toRegisterPage() {
+    Get.toNamed(Routes.REGISTER);
   }
 }
