@@ -11,14 +11,22 @@ dependencies:
     sdk: flutter
   get: 4.6.6
   google_fonts: ^6.1.0
+  http: ^1.1.0
   svg_flutter: ^0.0.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.13.1"
 
 flutter:
   uses-material-design: true
+  
   assets:
     - assets/svg/
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/img/logo-app.png"
+  remove_alpha_ios: true

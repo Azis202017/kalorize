@@ -33,7 +33,7 @@ class TextInput extends StatelessWidget {
         ),
         TextFormField(
           controller: textEditingController,
-          obscureText: isShowPassword != null ? true : false,
+          obscureText: isShowPassword ?? false,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator,
           decoration: InputDecoration(
@@ -43,14 +43,17 @@ class TextInput extends StatelessWidget {
                 minHeight: 20,
               ),
               suffixIcon: isShowPassword != null
-                  ? Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Image.asset(
-                        isShowPassword == true
-                            ? 'assets/svg/eye-slash.png'
-                            : 'assets/svg/eye.png',
-                        width: 20,
-                        height: 20,
+                  ? GestureDetector(
+                      onTap: showPassword,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Image.asset(
+                          isShowPassword == true
+                              ? 'assets/svg/eye-slash.png'
+                              : 'assets/svg/eye.png',
+                          width: 20,
+                          height: 20,
+                        ),
                       ),
                     )
                   : null),
