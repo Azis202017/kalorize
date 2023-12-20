@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class FullSizeButton extends StatelessWidget {
@@ -14,6 +13,7 @@ class FullSizeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
+      height: 40,
       child: ElevatedButton(
         onPressed: onPressed,
         child: Text(title),
