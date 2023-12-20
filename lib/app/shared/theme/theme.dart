@@ -6,41 +6,60 @@ import 'color.dart';
 ThemeData themeData = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
+      padding: const EdgeInsets.symmetric(
+        vertical: 11,
+      ),
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(100),
+        borderRadius: BorderRadius.circular(40),
       ),
+      disabledBackgroundColor: neutralDisable,
+    ),
+  ),
+  textButtonTheme: TextButtonThemeData(
+    style: TextButton.styleFrom(
+      padding: const EdgeInsets.symmetric(
+        vertical: 11,
+      ),
+      disabledForegroundColor: neutralSecondary,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          40,
+        ),
+      ),
+      foregroundColor: neutralSecondary,
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(
     border: InputBorder.none,
     filled: true,
-    fillColor: inputColor,
+    fillColor: neutralForm,
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide.none,
       borderRadius: BorderRadius.circular(
-        100,
+        40,
       ),
     ),
     focusedBorder: OutlineInputBorder(
       borderSide: BorderSide.none,
       borderRadius: BorderRadius.circular(
-        100,
+        40,
       ),
     ),
     focusedErrorBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: error),
+      borderSide: const BorderSide(color: errorPrimary),
       borderRadius: BorderRadius.circular(
-        100,
+        40,
       ),
     ),
     errorBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: error),
+      borderSide: const BorderSide(color: errorPrimary),
       borderRadius: BorderRadius.circular(
-        100,
+        40,
       ),
     ),
-    hintStyle: body2Regular,
+    hintStyle: pharagraph,
     contentPadding: const EdgeInsets.symmetric(
       horizontal: 24,
       vertical: 10,
@@ -59,6 +78,6 @@ ThemeData themeData = ThemeData(
     ),
   ),
   colorScheme: ColorScheme.fromSwatch().copyWith(
-    primary: primaryColor,
+    primary: mainPrimary,
   ),
 );
