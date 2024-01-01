@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:lottie/lottie.dart';
-import 'package:svg_flutter/svg_flutter.dart';
 
 class LogoWithText extends StatelessWidget {
   const LogoWithText({super.key});
