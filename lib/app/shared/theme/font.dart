@@ -34,12 +34,12 @@ TextStyle pharagraph = GoogleFonts.inter(
   color:neutralPrimary,
 );
 TextStyle labelLarge = GoogleFonts.inter(
-  fontSize:12,
+  fontSize:14,
   fontWeight:FontWeight.w700,
   color:neutralPrimary,
 );
 TextStyle labelSmall = GoogleFonts.inter(
-  fontSize:10,
+  fontSize:12,
   fontWeight:FontWeight.w700,
   color:neutralPrimary,
 );
