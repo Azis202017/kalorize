@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kalorize/app/helpers/alert_success.dart';
 import 'package:kalorize/app/services/auth_service.dart';
 import 'package:kalorize/app/services/input/login_input.dart';
 import 'package:kalorize/app/shared/theme/color.dart';
 
+import '../../../helpers/alert_error.dart';
 import '../../../routes/app_pages.dart';
 
 class LoginController extends GetxController {
@@ -37,19 +39,11 @@ class LoginController extends GetxController {
         password: passwordEditingController.text);
     bool isLoginSuccess = await AuthService().login(login);
     if (isLoginSuccess) {
-      Get.snackbar(
-        "Berhasil Masuk",
-        "Anda akan diarahkan ke halaman home",
-        colorText: whiteColor,
-        backgroundColor: Colors.green.shade400,
-      );
+     alertSuccess(title: "Selamat kamu berhasil login", subtitle: "Kamu akan diarahkan ke halaman home sebentar lagi");
     } else {
-      Get.snackbar(
-        "Gagal Masuk",
-        "Username atau password salah silahkan masukkan lagi",
-        colorText: whiteColor,
-        backgroundColor: error,
-      );
+     alertError(title: "Yahh ada kesalahan", subtitle: "Pastikan email dan password mu benar");
+
+      
     }
   }
   void toRegisterPage() {

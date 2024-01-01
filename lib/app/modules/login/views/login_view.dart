@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:kalorize/app/shared/widgets/rich_second_text.dart';
 
@@ -26,14 +27,14 @@ class LoginView extends GetView<LoginController> {
                   const SizedBox(
                     height: 70,
                   ),
-                  const CenterLogo(logo: 'logo'),
+                  const CenterLogo(logo: 'logo').animate().fadeIn(),
                   const SizedBox(
                     height: 61,
                   ),
                   const Welcome(
                     title: "Halo Lagi 😄",
                     subtitle: "Masuk dulu yuk.",
-                  ),
+                  ).animate().fadeIn(),
                   const SizedBox(
                     height: 20,
                   ),
@@ -42,10 +43,10 @@ class LoginView extends GetView<LoginController> {
                     textEditingController: controller.emailEditingController,
                     hintText: 'example@gmail.com',
                     validator: controller.emailValidate,
-                  ),
+                  ).animate().fadeIn(),
                   const SizedBox(
                     height: 20,
-                  ),
+                  ).animate().fadeIn(),
                   TextInput(
                     title: 'Password',
                     textEditingController: controller.passwordEditingController,
@@ -53,7 +54,7 @@ class LoginView extends GetView<LoginController> {
                     validator: controller.passwordValidate,
                     isShowPassword: controller.isObsecureText,
                     showPassword: controller.showPassword,
-                  ),
+                  ).animate().fadeIn(),
                   const SizedBox(
                     height: 40,
                   ),
@@ -61,14 +62,17 @@ class LoginView extends GetView<LoginController> {
                     text1: "Tidak mempunyai akun? ",
                     text2: "Daftar disini",
                     onTap: controller.toRegisterPage,
-                  ),
+                  ).animate().fadeIn(),
                   const SizedBox(
                     height: 8,
                   ),
                   FullSizeButton(
                     title: 'Masuk',
                     onPressed: controller.login,
-                  )
+                  ).animate().fadeIn(),
+                  const SizedBox(
+                    height: 28,
+                  ),
                 ],
               ),
             ),
