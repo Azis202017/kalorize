@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:svg_flutter/svg.dart';
 
 import '../theme/font.dart';
 
@@ -9,6 +10,9 @@ class TextInput extends StatelessWidget {
   final void Function()? showPassword;
   final bool? isShowPassword;
   final String? Function(String?)? validator;
+  final String? Function(String? value)? onChange;
+  final void Function()? onEditingComplete;
+  final FocusNode? focusNode;
   const TextInput({
     super.key,
     required this.title,
@@ -17,6 +21,9 @@ class TextInput extends StatelessWidget {
     required this.textEditingController,
     this.isShowPassword,
     this.validator,
+    this.onChange,
+    this.onEditingComplete,
+    this.focusNode,
   });
 
   @override
@@ -26,16 +33,19 @@ class TextInput extends StatelessWidget {
       children: [
         Text(
           title,
-          style: body2Medium,
+          style: labelLarge,
         ),
         const SizedBox(
           height: 10,
         ),
         TextFormField(
+          onChanged: onChange,
           controller: textEditingController,
           obscureText: isShowPassword ?? false,
+          focusNode: focusNode,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator,
+          onEditingComplete: onEditingComplete,
           decoration: InputDecoration(
               hintText: hintText,
               suffixIconConstraints: const BoxConstraints(
@@ -47,10 +57,10 @@ class TextInput extends StatelessWidget {
                       onTap: showPassword,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Image.asset(
+                        child: SvgPicture.asset(
                           isShowPassword == true
-                              ? 'assets/svg/eye-slash.png'
-                              : 'assets/svg/eye.png',
+                              ? 'assets/svg/eye-slash.svg'
+                              : 'assets/svg/eye.svg',
                           width: 20,
                           height: 20,
                         ),

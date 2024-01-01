@@ -21,12 +21,12 @@ class RichSecondText extends StatelessWidget {
         child: Text.rich(
           TextSpan(
             text: text1,
-            style: body2Regular,
+            style: pharagraph,
             children: [
               TextSpan(
                 text: text2,
-                style: body2Bold.copyWith(
-                  color: primaryColor,
+                style: labelSmall.copyWith(
+                  color: neutralPrimary,
                 ),
               ),
             ],

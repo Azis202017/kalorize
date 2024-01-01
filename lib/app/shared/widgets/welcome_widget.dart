@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../theme/font.dart';
@@ -17,11 +16,11 @@ class Welcome extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: h2Bold),
-        Text(
-          "$subtitle",
-          style:body2Regular
+        Text(title, style: display),
+        const SizedBox(
+          height: 4,
         ),
+        Text("$subtitle", style: subDisplay),
       ],
     );
   }
