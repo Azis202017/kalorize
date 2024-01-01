@@ -14,6 +14,7 @@ ThemeData themeData = ThemeData(
         borderRadius: BorderRadius.circular(40),
       ),
       disabledBackgroundColor: neutralDisable,
+      disabledForegroundColor: neutralLight,
     ),
   ),
   textButtonTheme: TextButtonThemeData(
