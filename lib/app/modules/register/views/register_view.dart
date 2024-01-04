@@ -100,7 +100,7 @@ class RegisterView extends GetView<RegisterController> {
                   const SizedBox(
                     height: 28,
                   ).animate().fadeIn(),
-                  FullSizeButton(
+                  PrimaryButton(
                     title: "Daftar",
                     onPressed: controller.isActiveButtonDaftar ? controller.register : null,
                   ).animate().fadeIn(),

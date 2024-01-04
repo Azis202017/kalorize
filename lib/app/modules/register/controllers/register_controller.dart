@@ -123,7 +123,6 @@ class RegisterController extends GetxController {
 
       Get.toNamed(Routes.LOGIN);
     } else {
-      print(false);
     }
   }
 
