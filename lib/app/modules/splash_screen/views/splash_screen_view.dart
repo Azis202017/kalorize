@@ -1,9 +1,8 @@
-import 'dart:async';
+
 
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:kalorize/app/routes/app_pages.dart';
 import 'package:kalorize/app/shared/widgets/logo_with_text.dart';
 
 import '../controllers/splash_screen_controller.dart';
