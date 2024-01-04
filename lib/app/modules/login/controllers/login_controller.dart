@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:kalorize/app/helpers/alert_success.dart';
 import 'package:kalorize/app/services/auth_service.dart';
 import 'package:kalorize/app/services/input/login_input.dart';
-import 'package:kalorize/app/shared/theme/color.dart';
 
 import '../../../helpers/alert_error.dart';
 import '../../../routes/app_pages.dart';

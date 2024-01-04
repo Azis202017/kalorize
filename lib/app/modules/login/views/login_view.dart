@@ -66,7 +66,7 @@ class LoginView extends GetView<LoginController> {
                   const SizedBox(
                     height: 8,
                   ),
-                  FullSizeButton(
+                  PrimaryButton(
                     title: 'Masuk',
                     onPressed: controller.login,
                   ).animate().fadeIn(),
