@@ -42,7 +42,6 @@ class AuthService {
         body: jsonEncode(body),
         headers: headers,
       );
-      print(response.body);
       if (response.statusCode == 200) {
         return true;
       }

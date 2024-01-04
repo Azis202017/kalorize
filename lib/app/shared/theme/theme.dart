@@ -78,6 +78,7 @@ ThemeData themeData = ThemeData(
       ),
     ),
   ),
+  scaffoldBackgroundColor: Colors.white,
   colorScheme: ColorScheme.fromSwatch().copyWith(
     primary: mainPrimary,
   ),

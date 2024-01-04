@@ -87,7 +87,7 @@ class Content extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: FullSizeButton(
+                child: PrimaryButton(
                   onPressed: nextPage,
                   title: "Lanjut",
                 ),

@@ -13,6 +13,7 @@ class TextInput extends StatelessWidget {
   final String? Function(String? value)? onChange;
   final void Function()? onEditingComplete;
   final FocusNode? focusNode;
+  final TextInputType? textInputType;
   const TextInput({
     super.key,
     required this.title,
@@ -24,6 +25,7 @@ class TextInput extends StatelessWidget {
     this.onChange,
     this.onEditingComplete,
     this.focusNode,
+    this.textInputType,
   });
 
   @override
@@ -46,6 +48,7 @@ class TextInput extends StatelessWidget {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator,
           onEditingComplete: onEditingComplete,
+          keyboardType: textInputType,
           decoration: InputDecoration(
               hintText: hintText,
               suffixIconConstraints: const BoxConstraints(
