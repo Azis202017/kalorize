@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kalorize/app/helpers/alert_confirm.dart';
 
 class ChangeProfileController extends GetxController {
   TextEditingController namaEditingController = TextEditingController();
@@ -26,7 +27,6 @@ class ChangeProfileController extends GetxController {
 
     update();
     return email;
-
   }
 
   String? onChangeNomorTelepon(String? value) {
@@ -78,5 +78,10 @@ class ChangeProfileController extends GetxController {
     return isButtonSaveActive;
   }
 
-  void changeProfile() {}
+  void changeProfile() {
+    alertConfirm(
+      saveButtonTap: () {},
+      cancelButtonTap: () {},
+    );
+  }
 }
