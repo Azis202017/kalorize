@@ -80,6 +80,7 @@ class ChangeProfileController extends GetxController {
 
   void changeProfile() {
     alertConfirm(
+      title: 'Apakah kamu yakin ingin menyimpan perubahan?',
       saveButtonTap: () {},
       cancelButtonTap: () {},
     );

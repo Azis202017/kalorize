@@ -16,6 +16,7 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
           key: controller.formKey,
           child: Scaffold(
             appBar:  HeaderWithButton(
+              title: 'Ubah Profile',
               onTap: controller.changeButtonActive() ? controller.changeProfile : null,
             ),
             body: SingleChildScrollView(
