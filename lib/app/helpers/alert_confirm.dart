@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kalorize/app/shared/theme/font.dart';
 
-import '../shared/theme/color.dart';
 
 void alertConfirm({
   required String title,
