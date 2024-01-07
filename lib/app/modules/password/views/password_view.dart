@@ -45,6 +45,7 @@ class PasswordView extends GetView<PasswordController> {
                     height: 20,
                   ),
                   TextInput(
+                    focusNode:controller.newPasswordFocusNode,
                     title: 'Password Baru',
                     validator: controller.onValidateNewPassword,
                     textEditingController:
@@ -59,6 +60,8 @@ class PasswordView extends GetView<PasswordController> {
                     height: 20,
                   ),
                   TextInput(
+                    focusNode:controller.confirmNewPasswordFocusNode,
+
                     textInputType: TextInputType.number,
                     title: 'Konfirmasi Password Baru',
                     textEditingController:

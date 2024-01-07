@@ -44,16 +44,16 @@ class PasswordController extends GetxController {
   bool isButtonSaveActive = false;
 
   void onSubmittedCurrentPassword() {
-    FocusScope.of(Get.context!).requestFocus(currentPasswordFocusNode);
+    FocusScope.of(Get.context!).requestFocus(newPasswordFocusNode);
   }
 
   void onSubmittedNewPassword() {
-    FocusScope.of(Get.context!).requestFocus(newPasswordFocusNode);
+    FocusScope.of(Get.context!).requestFocus(confirmNewPasswordFocusNode);
   }
 
   String? onValidateCurrentPassword(String? value) {
     if (value!.isEmpty) {
-      return "Mohon isi password terbaru  terlebih dahulu";
+      return "Mohon isi password lama terlebih dahulu";
     }
     return null;
   }
