@@ -5,31 +5,33 @@ import 'package:kalorize/app/shared/theme/font.dart';
 import '../shared/theme/color.dart';
 
 void alertConfirm({
+  required String title,
   void Function()? saveButtonTap,
   void Function()? cancelButtonTap,
 }) {
   Get.defaultDialog(
+    radius: 20,
     title: '',
+    contentPadding: EdgeInsets.zero,
     titlePadding: const EdgeInsets.only(
       top: 0,
     ),
     content: Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(
-        horizontal: 24,
+        horizontal: 20,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: neutralLight,
+        color: Colors.white,
       ),
-      height: 170, // Set the desired height here
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             width: double.infinity,
             child: Text(
-              'Apakah anda yakin untuk logout dari akun ini',
+              title,
               style: labelLarge,
               textAlign: TextAlign.center,
             ),
@@ -41,7 +43,7 @@ void alertConfirm({
             width: double.infinity,
             height: 44,
             child: ElevatedButton(
-              onPressed:saveButtonTap,
+              onPressed: saveButtonTap,
               child: const Text('Simpan'),
             ),
           ),

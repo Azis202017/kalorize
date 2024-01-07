@@ -7,9 +7,11 @@ import '../theme/font.dart';
 
 class HeaderWithButton extends StatelessWidget implements PreferredSizeWidget {
   final void Function()? onTap;
+  final String title;
   const HeaderWithButton({
     super.key,
     this.onTap,
+    required this.title,
   });
 
   @override
@@ -35,7 +37,7 @@ class HeaderWithButton extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.only(
               left: 8), // Sesuaikan nilai ini sesuai kebutuhan
           child: Text(
-            'Ubah Profil',
+            title,
             style: labelLarge.copyWith(
               color: mainSecondary,
             ),
