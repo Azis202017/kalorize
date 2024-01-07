@@ -13,14 +13,15 @@ class PasswordView extends GetView<PasswordController> {
     return GetBuilder<PasswordController>(builder: (_) {
       return Form(
         key: controller.formKey,
-        child: Scaffold(
+        child:  Scaffold(
           appBar: HeaderWithButton(
             title: 'Password',
             onTap: controller.changeButtonActive()
                 ? controller.changePassword
                 : null,
           ),
-          body: SingleChildScrollView(
+          body:
+           SingleChildScrollView(
             child: Container(
               margin: const EdgeInsets.symmetric(
                 horizontal: 16,
@@ -76,7 +77,8 @@ class PasswordView extends GetView<PasswordController> {
               ),
             ),
           ),
-        ),
+     
+       ),
       );
     });
   }
