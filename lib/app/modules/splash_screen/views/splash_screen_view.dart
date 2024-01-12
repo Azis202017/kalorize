@@ -1,10 +1,13 @@
 
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:kalorize/app/shared/widgets/logo_with_text.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/splash_screen_controller.dart';
 
 class SplashScreenView extends GetView<SplashScreenController> {
@@ -14,9 +17,9 @@ class SplashScreenView extends GetView<SplashScreenController> {
   Widget build(BuildContext context) {
     return GetBuilder<SplashScreenController>(
       initState: (_) {
-        // Timer(const Duration(seconds: 3), () {
-        //   Get.offAndToNamed(Routes.ONBOARDING);
-        // });
+        Timer(const Duration(seconds: 3), () {
+          Get.offAndToNamed(Routes.ONBOARDING);
+        });
       },
       builder: (_) {
         return const Material(
