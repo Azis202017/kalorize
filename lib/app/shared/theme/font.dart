@@ -10,13 +10,13 @@ TextStyle display = GoogleFonts.inter(
 
 
 TextStyle subDisplay = GoogleFonts.inter(
-  fontSize:16,
+  fontSize:18,
   fontWeight:FontWeight.w500,
   color:neutralPrimary,
 );
 
 TextStyle title = GoogleFonts.inter(
-  fontSize:16,
+  fontSize:18,
   fontWeight:FontWeight.w800,
   color:neutralPrimary,
 );

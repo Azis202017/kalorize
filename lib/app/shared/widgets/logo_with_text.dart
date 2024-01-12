@@ -18,9 +18,6 @@ class LogoWithText extends StatelessWidget {
             .animate()
             .moveY(
               duration: 700.ms,
-            )
-            .shake(
-              duration: 700.ms,
             ),
         const SizedBox(
           height: 20,
