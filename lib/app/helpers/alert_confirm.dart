@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kalorize/app/shared/theme/font.dart';
 
-
 void alertConfirm({
   required String title,
+  String? saveTitle,
+  String? cancelTitle,
+
   void Function()? saveButtonTap,
   void Function()? cancelButtonTap,
 }) {
@@ -43,7 +45,9 @@ void alertConfirm({
             height: 44,
             child: ElevatedButton(
               onPressed: saveButtonTap,
-              child: const Text('Simpan'),
+              child:  Text(
+                saveTitle ?? "Simpan",
+              ),
             ),
           ),
           const SizedBox(
@@ -54,7 +58,7 @@ void alertConfirm({
             height: 44,
             child: TextButton(
               onPressed: cancelButtonTap,
-              child: const Text('Batal'),
+              child:  Text(cancelTitle ?? "Batal"),
             ),
           )
         ],
