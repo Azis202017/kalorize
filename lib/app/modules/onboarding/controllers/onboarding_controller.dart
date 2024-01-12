@@ -15,6 +15,12 @@ class OnboardingController extends GetxController {
   String title = "";
   String subtitle = "";
   int currentPage = 0;
+  @override
+  void onInit() {
+    super.onInit();
+    title = "Bantu atur diet";
+    subtitle = "Solusi terbaik agar kamu tidak bingung dalam mengatur diet";
+  }
 
   @override
   void onReady() {
