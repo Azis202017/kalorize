@@ -6,15 +6,19 @@ Kalorize merupakan aplikasi mobile yang memberikan kemudahan bagi aktivis gym da
 **Super Team Kalorize**
 
 CEO
+
 Muhammad Syariful Umam - Hipster
 
 CMOO - Finance and Tech
+
 Glorious Satria Dhamang Aji - Hustler / Hacker
 
 CTO - Tech and Product
+
 Azis Al-Ayyubbi - Hacker
 
 CAIO - Artificial Intellegence and Data
+
 Agung Hadi Winoto - Hacker
 
 ## Installation
