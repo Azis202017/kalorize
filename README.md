@@ -3,21 +3,20 @@
 
 Kalorize merupakan aplikasi mobile yang memberikan kemudahan bagi aktivis gym dalam mengatur dan mendapatkan menu makan untuk opsi diet. Kalorize memiliki fitur rekomendasi menu makanan berdasarkan preferensi pengguna. Fitur rekomendasi makanan ini berdasarkan kuisioner yang diisi pengguna dan menghasilkan resep makanan yang dapat diakses oleh orang indonesia. data setiap makanan disertakan juga keterangan jumlah kalori dan protein dari setiap makanan. selain itu, pengguna dapat menandai makanan yang akan dimakan untuk sarapan, makan siang dan makan malam setiap harinya. Secara bisnis, aplikasi kalorize menggunakan konsep business to business (b2b) dengan pemiliki gym. Akses aplikasi kalorize secara khusus diperuntukkan kepada anggota gym aktif yang terdaftar pada gym tersebut. Selain itu, kalorize bekerja sama dengan franchise/penjual makanan untuk mempermudah akses pengguna dalam mendapatkan makanan tersebut.
 
-**Super Team Kalorize**
+## **Super Team Kalorize**
 
-CEO
-
+### **CEO**
 Muhammad Syariful Umam - Hipster
 
-CMOO - Finance and Tech
+### **CMOO - Finance and Tech**
 
 Glorious Satria Dhamang Aji - Hustler / Hacker
 
-CTO - Tech and Product
+### **CTO - Tech and Product**
 
 Azis Al-Ayyubbi - Hacker
 
-CAIO - Artificial Intellegence and Data
+### **CAIO - Artificial Intellegence and Data**
 
 Agung Hadi Winoto - Hacker
 
