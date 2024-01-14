@@ -32,7 +32,6 @@ class RegisterController extends GetxController {
         password?.isNotEmpty == true &&
         confirm?.isNotEmpty == true &&
         kodeGym?.isNotEmpty == true &&
-        kodeReferral?.isNotEmpty == true &&
         password == confirm; // Check if password and confirm password match
     update();
   }
@@ -112,6 +111,8 @@ class RegisterController extends GetxController {
       nama: nameEdtController.text,
       password: passwordEdtController.text,
       passwordConfirmation: confirmPasswordController.text,
+      kodeGym: kodeGymEdtController.text,
+      kodeReferral: kodeReferralEdtController.text,
     );
     bool isSuccessRegister = await AuthService().register(registerInput);
     if (isSuccessRegister) {
@@ -122,8 +123,7 @@ class RegisterController extends GetxController {
       clearForm();
 
       Get.toNamed(Routes.LOGIN);
-    } else {
-    }
+    } else {}
   }
 
   void clearForm() {

@@ -4,6 +4,7 @@ import 'package:kalorize/app/shared/theme/font.dart';
 import 'color.dart';
 
 ThemeData themeData = ThemeData(
+  useMaterial3: false,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       padding: const EdgeInsets.symmetric(

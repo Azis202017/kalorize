@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:kalorize/app/helpers/alert_confirm.dart';
 
 class ProfileController extends GetxController {
-  //TODO: Implement ProfileController
+  
 
   final count = 0.obs;
 
