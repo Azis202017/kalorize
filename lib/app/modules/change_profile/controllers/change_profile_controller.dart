@@ -73,7 +73,6 @@ class ChangeProfileController extends GetxController {
         email.isNotEmpty &&
         email.contains("@") &&
         noTelepon.isNotEmpty;
-    print(isButtonSaveActive);
     update();
     return isButtonSaveActive;
   }
