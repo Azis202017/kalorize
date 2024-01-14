@@ -41,20 +41,18 @@ flutter run
 ```
     
 ## Screenshots
-![Onboarding Splash Screen ](screenshot/onboarding1.png)
+<img src="screenshot/onboarding1.png" width="120" height="120" alt="Onboarding Splash Screen">
 
-![Onboarding 1](screenshot/onboarding1.png)
-![Onboarding 2](screenshot/onboarding2.png)
-![Onboarding 3](screenshot/onboarding3.png)
+<img src="screenshot/onboarding1.png" width="120" height="120" alt="Onboarding 1">
+<img src="screenshot/onboarding2.png" width="120" height="120" alt="Onboarding 2">
+<img src="screenshot/onboarding3.png" width="120" height="120" alt="Onboarding 3">
 
-![Login](screenshot/login.png)
-![Register](screenshot/register.png)
+<img src="screenshot/login.png" width="120" height="120" alt="Login">
+<img src="screenshot/register.png" width="120" height="120" alt="Register">
 
-![Change Password](screenshot/profile.png)
-![Change Profile](screenshot/ubah_profile.png)
-![Change Password](screenshot/password.png)
-
-
+<img src="screenshot/profile.png" width="120" height="120" alt="Change Password">
+<img src="screenshot/ubah_profile.png" width="120" height="120" alt="Change Profile">
+<img src="screenshot/password.png" width="120" height="120" alt="Change Password">
 
 
 
