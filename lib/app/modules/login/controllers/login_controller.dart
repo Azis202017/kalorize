@@ -5,6 +5,7 @@ import 'package:kalorize/app/services/auth_service.dart';
 import 'package:kalorize/app/services/input/login_input.dart';
 
 import '../../../helpers/alert_error.dart';
+import '../../../helpers/alert_loading.dart';
 import '../../../routes/app_pages.dart';
 
 class LoginController extends GetxController {
@@ -27,24 +28,31 @@ class LoginController extends GetxController {
     return null;
   }
 
-  void showPassword()  {
+  void showPassword() {
     isObsecureText = !isObsecureText;
     update();
   }
 
   void login() async {
+    alertLoading();
     LoginInput login = LoginInput(
         email: emailEditingController.text,
         password: passwordEditingController.text);
     bool isLoginSuccess = await AuthService().login(login);
+    Get.back();
     if (isLoginSuccess) {
-     alertSuccess(title: "Selamat kamu berhasil login", subtitle: "Kamu akan diarahkan ke halaman home sebentar lagi");
+      alertSuccess(
+          title: "Selamat kamu berhasil login",
+          subtitle: "Kamu akan diarahkan ke halaman home sebentar lagi");
+      Get.offAllNamed(Routes.HOME);
     } else {
-     alertError(title: "Yahh ada kesalahan", subtitle: "Pastikan email dan password mu benar");
-
-      
+      alertError(
+          title: "Yahh ada kesalahan",
+          subtitle: "Pastikan email dan password mu benar");
     }
   }
+
+ 
   void toRegisterPage() {
     Get.toNamed(Routes.REGISTER);
   }
