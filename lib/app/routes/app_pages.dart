@@ -12,6 +12,8 @@ import '../modules/password/bindings/password_binding.dart';
 import '../modules/password/views/password_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/questionare/bindings/questionare_binding.dart';
+import '../modules/questionare/views/questionare_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
@@ -24,7 +26,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH_SCREEN  ;
+  static const INITIAL = Routes.QUESTIONARE;
 
   static final routes = [
     GetPage(
@@ -66,6 +68,11 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.QUESTIONARE,
+      page: () => const QuestionareView(),
+      binding: QuestionareBinding(),
     ),
   ];
 }
