@@ -1,22 +1,66 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:kalorize/app/routes/app_pages.dart';
+import 'package:kalorize/app/shared/theme/font.dart';
 
+import '../../../shared/theme/color.dart';
+import '../../../shared/widgets/home/header_profile.dart';
+import '../../../shared/widgets/home/indicator_card.dart';
+import '../../../shared/widgets/home/questionare.dart';
+import '../../../shared/widgets/home/title_description.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomeView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'HomeView is working',
-          style: TextStyle(fontSize: 20),
+    return SafeArea(
+      child: Scaffold(
+        body: RefreshIndicator(
+          onRefresh: () async => print("Hello world"),
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Container(
+              margin: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 23,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  HeaderProfile(
+                    name: 'Umam',
+                    onPressed: () => Get.toNamed(
+                      Routes.PROFILE,
+                    ),
+                  ),
+                  Questionare(
+                    onPressed: () => Get.toNamed(
+                      Routes.QUESTIONARE,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const IndicatorCard(),
+                  const TitleDescription(
+                    title: "Sarapan 🥄",
+                    subtitle: "Jangan lupa sarapan sebelum jam 9 pagi ya 💪",
+                  ),
+                  const TitleDescription(
+                    title: "Makan Siang 🍴",
+                    subtitle:
+                        "Tetep berenergi dengan makan di jam 11.00 - 14.00 😊",
+                  ),
+                  const TitleDescription(
+                    title: "Makan Malam 🍽",
+                    subtitle: "Wajib makan sebelum jam 20.00 ya!! 🙌",
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
