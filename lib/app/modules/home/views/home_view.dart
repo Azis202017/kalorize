@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:kalorize/app/routes/app_pages.dart';
-import 'package:kalorize/app/shared/theme/font.dart';
 
-import '../../../shared/theme/color.dart';
 import '../../../shared/widgets/home/header_profile.dart';
 import '../../../shared/widgets/home/indicator_card.dart';
 import '../../../shared/widgets/home/questionare.dart';
