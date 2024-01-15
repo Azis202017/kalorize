@@ -2,9 +2,37 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class QuestionareController extends GetxController {
-  TextEditingController umur = TextEditingController();
-  TextEditingController beratBadan = TextEditingController();
-  TextEditingController tinggiBadan = TextEditingController();
+  String umur = "";
+  String beratBadan = "";
+  String tinggiBadan = "";
+  FocusNode focusNodeUmur = FocusNode();
+  FocusNode focusNodeBeratBadan = FocusNode();
+  int currentGender = -1;
+  int currentFrequencyGym = -1;
+  int currentTarget = -1;
+
+  FocusNode focusNodeTinggiBadan = FocusNode();
+  bool isButtonActive = false;
+  TextEditingController umurEdtController = TextEditingController();
+  TextEditingController beratBadanEdtController = TextEditingController();
+  TextEditingController tinggiBadanEdtController = TextEditingController();
+  String? onChangeUmur(String? value) {
+    umur = value ?? "";
+    update();
+    return umur;
+  }
+
+  String? onChangeBeratBadan(String? value) {
+    beratBadan = value ?? "";
+    update();
+    return beratBadan;
+  }
+
+  String? onChangeTinggiBadan(String? value) {
+    tinggiBadan = value ?? "";
+    update();
+    return tinggiBadan;
+  }
 
   String? validateUmur(String? value) {
     if (value == null || value.isEmpty) {
@@ -55,5 +83,75 @@ class QuestionareController extends GetxController {
     }
 
     return null;
+  }
+
+  bool isMaleSelected = false;
+  bool isFemaleSelected = false;
+  void onMaleSelected() {
+    isMaleSelected = !isMaleSelected;
+    currentGender = 0;
+    isFemaleSelected = false;
+    update();
+  }
+
+  void onFemaleSelected() {
+    isFemaleSelected = !isFemaleSelected;
+    currentGender = 1;
+    isMaleSelected = false;
+    update();
+  }
+
+  void onSubmittedUmur() {
+    FocusScope.of(Get.context!).requestFocus(focusNodeBeratBadan);
+
+    update();
+  }
+
+  void onSubmittedBeratBadan() {
+    FocusScope.of(Get.context!).requestFocus(focusNodeTinggiBadan);
+
+    update();
+  }
+
+  bool activeButton() {
+    isButtonActive = umur.isNotEmpty &&
+        beratBadan.isNotEmpty &&
+        tinggiBadan.isNotEmpty &&
+        currentGender != -1;
+    return isButtonActive;
+  }
+
+  void gymFrequencyExtreme() {
+    currentFrequencyGym = 0;
+    update();
+  }
+
+  void gymFrequencyHard() {
+    currentFrequencyGym = 1;
+    update();
+  }
+
+  void gymFrequencyMedium() {
+    currentFrequencyGym = 2;
+    update();
+  }
+
+  void gymFrequencyEasy() {
+    currentFrequencyGym = 3;
+    update();
+  }
+   void targetReduceWeight() {
+    currentTarget = 0;
+    update();
+  }
+
+  void targetIncreaseMuscle() {
+    currentTarget = 1;
+    update();
+  }
+
+  void targetBeHealthy() {
+    currentTarget = 2;
+    update();
   }
 }
