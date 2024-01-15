@@ -125,7 +125,7 @@ class IndicatorCard extends StatelessWidget {
                         ),
                       ),
                       TextSpan(
-                        text: 'kcal ',
+                        text: 'gr ',
                         style: subTitle.copyWith(),
                       ),
                     ],

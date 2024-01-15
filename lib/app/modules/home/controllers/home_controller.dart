@@ -11,7 +11,7 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
 
-    dateController.text = 'Hari ini ${dateFormat(selectedDate)}';
+    dateController.text = 'Hari ini, ${dateFormat(selectedDate)}';
   }
 
   Future<void> showDate() async {
@@ -33,7 +33,7 @@ class HomeController extends GetxController {
       String formattedCurrentDate = DateFormat.yMd().format(currentDate);
 
       if (formattedPickedDate == formattedCurrentDate) {
-        dateController.text = 'Hari ini ${dateFormat(selectedDate)}';
+        dateController.text = 'Hari ini, ${dateFormat(selectedDate)}';
       } else {
         dateController.text = dateFormat(selectedDate);
       }
