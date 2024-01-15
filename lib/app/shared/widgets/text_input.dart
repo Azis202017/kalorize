@@ -13,12 +13,12 @@ class TextInput extends StatelessWidget {
   final String? Function(String? value)? onChange;
   final void Function()? onEditingComplete;
   final void Function()? onTap;
-
   final FocusNode? focusNode;
   final TextInputType? textInputType;
   final bool readOnly;
+
   const TextInput({
-    super.key,
+    Key? key,
     required this.title,
     this.showPassword,
     this.hintText,
@@ -31,8 +31,7 @@ class TextInput extends StatelessWidget {
     this.textInputType,
     this.onTap,
     this.readOnly = false,
-    
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,28 +57,54 @@ class TextInput extends StatelessWidget {
           onEditingComplete: onEditingComplete,
           keyboardType: textInputType,
           decoration: InputDecoration(
-              hintText: hintText,
-              suffixIconConstraints: const BoxConstraints(
-                minWidth: 20,
-                minHeight: 20,
-              ),
-              suffixIcon: isShowPassword != null
-                  ? GestureDetector(
-                      onTap: showPassword,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: SvgPicture.asset(
-                          isShowPassword == true
-                              ? 'assets/svg/eye-slash.svg'
-                              : 'assets/svg/eye.svg',
-                          width: 20,
-                          height: 20,
-                        ),
-                      ),
-                    )
-                  : null),
+            hintText: hintText,
+            suffixIconConstraints: const BoxConstraints(
+              minWidth: 20,
+              minHeight: 20,
+            ),
+            suffixIcon: _buildSuffixIcon(),
+          ),
         ),
       ],
     );
+  }
+
+  Widget? _buildSuffixIcon() {
+    if (isShowPassword != null) {
+      if (isShowPassword!) {
+        return GestureDetector(
+          onTap: showPassword,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: SvgPicture.asset(
+              'assets/svg/eye-slash.svg',
+              width: 20,
+              height: 20,
+            ),
+          ),
+        );
+      } else {
+        return GestureDetector(
+          onTap: showPassword,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: SvgPicture.asset(
+              'assets/svg/eye.svg',
+              width: 20,
+              height: 20,
+            ),
+          ),
+        );
+      }
+    } else {
+      // Tambahkan ikon kalender di sini
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Image.asset(
+          'assets/img/calendar.png',
+          width:20, height:20,
+        ),
+      );
+    }
   }
 }
