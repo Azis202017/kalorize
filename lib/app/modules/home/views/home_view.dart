@@ -7,6 +7,7 @@ import '../../../shared/widgets/home/header_profile.dart';
 import '../../../shared/widgets/home/indicator_card.dart';
 import '../../../shared/widgets/home/questionare.dart';
 import '../../../shared/widgets/home/title_description.dart';
+import '../../../shared/widgets/text_input.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -32,6 +33,13 @@ class HomeView extends GetView<HomeController> {
                     onPressed: () => Get.toNamed(
                       Routes.PROFILE,
                     ),
+                  ),
+                  TextInput(
+                    title: '',
+                    textEditingController: TextEditingController(),
+                    readOnly: true,
+                    onTap: controller.showDate,
+                    hintText: 'Hari ini, 21 Desember 2023',
                   ),
                   Questionare(
                     onPressed: () => Get.toNamed(
