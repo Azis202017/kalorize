@@ -20,6 +20,7 @@ class RegisterController extends GetxController {
   String? kodeGym = "";
   String? kodeReferral = "";
   bool isActiveButtonDaftar = false;
+
   final nameFocusNode = FocusNode();
 
   final emailFocusNode = FocusNode();
@@ -122,7 +123,7 @@ class RegisterController extends GetxController {
       );
       clearForm();
 
-      Get.toNamed(Routes.LOGIN);
+      Get.offAllNamed(Routes.QUESTIONARE);
     } else {}
   }
 

@@ -75,8 +75,9 @@ ThemeData themeData = ThemeData(
         style: BorderStyle.solid,
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(40),
       ),
+      foregroundColor: mainSecondary
     ),
   ),
   scaffoldBackgroundColor: Colors.white,

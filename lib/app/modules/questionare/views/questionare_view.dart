@@ -16,6 +16,11 @@ class QuestionareView extends GetView<QuestionareController> {
       return SafeArea(
         child: Scaffold(
           body: PageView(
+            controller: controller.pageController,
+            onPageChanged: (int index) {
+              controller.currentIndex = index;
+              controller.update();
+            },
             children: [
               SingleChildScrollView(
                 child: Container(
@@ -56,7 +61,7 @@ class QuestionareView extends GetView<QuestionareController> {
                         onUmurSubmitted: controller.onSubmittedUmur,
                         onBeratBadanSubmitted: controller.onSubmittedBeratBadan,
                         onTap: controller.activeButton()
-                            ? () => print("Helo world")
+                            ? controller.nextPage
                             : null,
                       ),
                     ],
@@ -71,15 +76,18 @@ class QuestionareView extends GetView<QuestionareController> {
                   ),
                   child: Column(
                     children: [
-                      const Row(
-                        children: [
-                          Icon(
-                            Icons.arrow_back_ios_new,
-                          ),
-                          Text(
-                            'Kembali',
-                          ),
-                        ],
+                      GestureDetector(
+                        onTap: controller.previousPage,
+                        child: const Row(
+                          children: [
+                            Icon(
+                              Icons.arrow_back_ios_new,
+                            ),
+                            Text(
+                              'Kembali',
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(
                         height: 24,
@@ -139,93 +147,98 @@ class QuestionareView extends GetView<QuestionareController> {
                         title: 'Lanjutkan',
                         height: 44,
                         onPressed: controller.currentFrequencyGym != -1
-                            ? () => print("")
+                            ? controller.nextPage
                             : null,
                       ),
                     ],
                   ),
                 ),
               ),
-              SingleChildScrollView(
-                child: Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 23,
-                  ),
-                  child: Column(
-                    children: [
-                      const Row(
-                        children: [
-                          Icon(
-                            Icons.arrow_back_ios_new,
+              RefreshIndicator(
+                onRefresh: () async => controller.getUserData(),
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 23,
+                    ),
+                    child: Column(
+                      children: [
+                        GestureDetector(
+                          onTap: controller.previousPage,
+                          child: const Row(
+                            children: [
+                              Icon(
+                                Icons.arrow_back_ios_new,
+                              ),
+                              Text(
+                                'Kembali',
+                              ),
+                            ],
                           ),
-                          Text(
-                            'Kembali',
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 24,
-                      ),
-                      Text(
-                        'Jawablah pertanyaan untuk tau lebih banyak tentangmu',
-                        style: display,
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(
-                        height: 28,
-                      ),
-                      Text(
-                        'Pilih targetmu',
-                        style: subTitle,
-                      ),
-                      const SizedBox(
-                        height: 28,
-                      ),
-                      GymFrequensy(
-                        index: 0,
-                        title: "Mengurangi berat badan",
-                        isSelected: controller.currentTarget == 0,
-                        onPressed: controller.targetReduceWeight,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      GymFrequensy(
-                        index: 1,
-                        title: "Meningkatkan masa otot",
-                        isSelected: controller.currentTarget == 1,
-                        onPressed: controller.targetIncreaseMuscle,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      GymFrequensy(
-                        index: 2,
-                        title: "Menjaga Berat Badan",
-                        isSelected: controller.currentTarget == 2,
-                        onPressed: controller.targetBeHealthy,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                    
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      PrimaryButton(
-                        title: 'Simpan',
-                        height: 44,
-                        onPressed: controller.currentTarget != -1
-                            ? () => print("")
-                            : null,
-                      ),
-                    ],
+                        ),
+                        const SizedBox(
+                          height: 24,
+                        ),
+                        Text(
+                          'Jawablah pertanyaan untuk tau lebih banyak tentangmu',
+                          style: display,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(
+                          height: 28,
+                        ),
+                        Text(
+                          'Pilih targetmu',
+                          style: subTitle,
+                        ),
+                        const SizedBox(
+                          height: 28,
+                        ),
+                        GymFrequensy(
+                          index: 0,
+                          title: "Mengurangi berat badan",
+                          isSelected: controller.currentTarget == 0,
+                          onPressed: controller.targetReduceWeight,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        GymFrequensy(
+                          index: 1,
+                          title: "Meningkatkan masa otot",
+                          isSelected: controller.currentTarget == 1,
+                          onPressed: controller.targetIncreaseMuscle,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        GymFrequensy(
+                          index: 2,
+                          title: "Menjaga Berat Badan",
+                          isSelected: controller.currentTarget == 2,
+                          onPressed: controller.targetBeHealthy,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        PrimaryButton(
+                          title: 'Simpan',
+                          height: 44,
+                          onPressed: controller.activeButtonSave()
+                              ?controller.saveQuestionare
+                              : null,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-           
-           ],
+            ],
           ),
         ),
       );
