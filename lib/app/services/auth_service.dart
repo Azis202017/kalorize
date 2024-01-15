@@ -18,7 +18,7 @@ class AuthService {
         headers: headers,
       );
       if (response.statusCode == 200) {
-        String token = json.decode(response.body)['data']['token'];
+        String token = json.decode(response.body)['data']['refresh_token'];
         storage.write('token', token);
         return true;
       }
@@ -45,7 +45,10 @@ class AuthService {
         body: jsonEncode(body),
         headers: headers,
       );
+      print(response.body);
       if (response.statusCode == 200) {
+        String token = json.decode(response.body)['data']['token'];
+        storage.write('token', token);
         return true;
       }
       return false;

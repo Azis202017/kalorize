@@ -1,7 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:kalorize/app/services/questionare_service.dart';
+
+import '../../../data/model/user_model.dart';
+import '../../../services/input/questionare_input.dart';
+import '../../../services/users_service.dart';
 
 class QuestionareController extends GetxController {
+  UserModel? user = UserModel();
   String umur = "";
   String beratBadan = "";
   String tinggiBadan = "";
@@ -10,12 +16,14 @@ class QuestionareController extends GetxController {
   int currentGender = -1;
   int currentFrequencyGym = -1;
   int currentTarget = -1;
+  int currentIndex = 0;
 
   FocusNode focusNodeTinggiBadan = FocusNode();
   bool isButtonActive = false;
   TextEditingController umurEdtController = TextEditingController();
   TextEditingController beratBadanEdtController = TextEditingController();
   TextEditingController tinggiBadanEdtController = TextEditingController();
+  final PageController pageController = PageController();
   String? onChangeUmur(String? value) {
     umur = value ?? "";
     update();
@@ -140,7 +148,8 @@ class QuestionareController extends GetxController {
     currentFrequencyGym = 3;
     update();
   }
-   void targetReduceWeight() {
+
+  void targetReduceWeight() {
     currentTarget = 0;
     update();
   }
@@ -153,5 +162,65 @@ class QuestionareController extends GetxController {
   void targetBeHealthy() {
     currentTarget = 2;
     update();
+  }
+
+  bool activeButtonSave() {
+    return currentTarget != -1 &&
+        currentFrequencyGym != -1 &&
+        umur.isNotEmpty &&
+        beratBadan.isNotEmpty &&
+        tinggiBadan.isNotEmpty &&
+        currentGender != -1;
+  }
+
+  void saveQuestionare() async {
+    QuestionareInput questionareInput = QuestionareInput(
+      idUser: user?.idUser ?? "",
+      umur: int.parse(umur),
+      beratBadan: int.parse(beratBadan),
+      frekuensiGym: currentFrequencyGym,
+      jenisKelamin: currentGender,
+      targetKalori: currentTarget,
+      tinggiBadan: int.parse(tinggiBadan),
+    );
+    await QuestionareService().fillQuestion(questionareInput: questionareInput);
+  }
+
+  @override
+  void onClose() {
+    pageController.dispose();
+
+    super.onClose();
+  }
+
+  void nextPage() {
+    if (currentIndex < 2) {
+      currentIndex++;
+      pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.ease,
+      );
+      update();
+    }
+  }
+
+  void previousPage() {
+    if (currentIndex > 0) {
+      currentIndex;
+      pageController.previousPage(
+          duration: const Duration(milliseconds: 300), curve: Curves.ease);
+      update();
+    }
+  }
+
+  void getUserData() async {
+    user = await UserService().fetchUserData();
+
+    update();
+  }
+  @override
+  void onInit() {
+    getUserData();
+    super.onInit();
   }
 }
