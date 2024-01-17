@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kalorize/app/routes/app_pages.dart';
-import 'package:kalorize/app/shared/theme/font.dart';
 import 'package:kalorize/app/shared/widgets/home/list_food_card.dart';
 import 'package:kalorize/app/shared/widgets/home/list_food_dinner.dart';
 
@@ -82,15 +81,12 @@ class HomeView extends GetView<HomeController> {
                                       .recommendationFood?.breakfast
                                       ?.indexOf(selectedFood!) ??
                                   -1;
-                              print("breakfast: $selectedFoodIndex");
                               if (selectedFoodIndex >= 0) {
                                 if (controller.selectedItems['breakfast'] ==
                                     null) {
-                                  // Jika belum ada item yang dipilih, pilih item
                                   controller.selectItem(
                                       'breakfast', selectedFoodIndex);
                                 } else {
-                                  // Jika sudah ada item yang dipilih, batalkan pemilihan
                                   controller.cancelSelection('breakfast');
                                 }
                               }
@@ -114,7 +110,6 @@ class HomeView extends GetView<HomeController> {
                                       .recommendationFood?.lunch
                                       ?.indexOf(selectedFood ?? Breakfast()) ??
                                   -1;
-                              print("lunch: $selectedFoodIndex");
 
                               if (selectedFoodIndex >= 0) {
                                 if (controller.selectedItems['lunch'] == null) {
@@ -145,16 +140,13 @@ class HomeView extends GetView<HomeController> {
                                       .recommendationFood?.dinner
                                       ?.indexOf(selectedFood ?? Breakfast()) ??
                                   -1;
-                              print("dinner: $selectedFoodIndex");
 
                               if (selectedFoodIndex >= 0) {
                                 if (controller.selectedItems['dinner'] ==
                                     null) {
-                                  // Jika belum ada item yang dipilih, pilih item
                                   controller.selectItem(
                                       'dinner', selectedFoodIndex);
                                 } else {
-                                  // Jika sudah ada item yang dipilih, batalkan pemilihan
                                   controller.cancelSelection('dinner');
                                 }
                               }
