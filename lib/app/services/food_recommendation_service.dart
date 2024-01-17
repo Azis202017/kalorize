@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart';
 import 'package:kalorize/app/data/model/recommendation_food.dart';
 import 'package:kalorize/app/services/input/recommendation_input.dart';
@@ -27,7 +26,6 @@ class FoodRecommendationService {
       },
       body: jsonEncode(body),
     );
-    print(response.body);
     if (response.statusCode == 200) {
       return RecommendationFood.fromJson(jsonDecode(response.body));
     }
