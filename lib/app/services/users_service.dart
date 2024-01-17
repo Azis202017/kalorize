@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart';
 import 'package:kalorize/app/services/input/change_profile_input.dart';
 
@@ -17,8 +16,6 @@ class UserService {
         Uri.parse('$apiUrl/user'),
         headers: {'Authorization': 'Bearer ${storage.read('token')}'},
       );
-      print(response.body);
-      print(GetStorage().read('token'));
       if (response.statusCode == 200) {
         return UserModel.fromJson(jsonDecode(response.body)['data']);
       }
@@ -68,7 +65,6 @@ class UserService {
       },
       body: jsonEncode(body),
     );
-    print(response.body);
     if (response.statusCode == 200) {
       return true;
     }
