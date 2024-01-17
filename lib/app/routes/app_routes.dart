@@ -14,6 +14,8 @@ abstract class Routes {
   static const PASSWORD = _Paths.PASSWORD;
   static const PROFILE = _Paths.PROFILE;
   static const QUESTIONARE = _Paths.QUESTIONARE;
+  static const AFTER_QUESTIONARE = _Paths.AFTER_QUESTIONARE;
+  static const DETAIL_FOOD = _Paths.DETAIL_FOOD;
 }
 
 abstract class _Paths {
@@ -27,4 +29,6 @@ abstract class _Paths {
   static const PASSWORD = '/password';
   static const PROFILE = '/profile';
   static const QUESTIONARE = '/questionare';
+  static const AFTER_QUESTIONARE = '/after-questionare';
+  static const DETAIL_FOOD = '/detail-food';
 }
