@@ -63,7 +63,6 @@ class PasswordView extends GetView<PasswordController> {
                   TextInput(
                     focusNode:controller.confirmNewPasswordFocusNode,
 
-                    textInputType: TextInputType.number,
                     title: 'Konfirmasi Password Baru',
                     textEditingController:
                         controller.confirmNewPasswordEditingController,

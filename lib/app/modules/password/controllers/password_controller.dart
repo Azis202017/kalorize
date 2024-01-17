@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kalorize/app/helpers/alert_error.dart';
+import 'package:kalorize/app/services/input/change_password_input.dart';
 
 import '../../../helpers/alert_confirm.dart';
+import '../../../helpers/alert_loading.dart';
+import '../../../helpers/alert_success.dart';
+import '../../../services/users_service.dart';
 
 class PasswordController extends GetxController {
   TextEditingController currentPasswordEditingController =
@@ -79,12 +84,12 @@ class PasswordController extends GetxController {
     update();
     return isButtonSaveActive;
   }
-  
+
   void changePassword() {
     if (formKey.currentState!.validate()) {
       alertConfirm(
         title: 'Apakah kamu yakin ingin menyimpan perubahan',
-        saveButtonTap: () {},
+        saveButtonTap: savePassword,
         cancelButtonTap: () {
           Get.back();
         },
@@ -92,16 +97,38 @@ class PasswordController extends GetxController {
     }
   }
 
-   void changeCurrentPasswordObsecure() {
+  void changeCurrentPasswordObsecure() {
     isObsecureCurrentPassword = !isObsecureCurrentPassword;
     update();
   }
-   void changeNewPasswordObsecure() {
+
+  void changeNewPasswordObsecure() {
     isObsecureNewPassword = !isObsecureNewPassword;
     update();
-  }   
-   void changeConfirmNewPasswordObsecure() {
+  }
+
+  void changeConfirmNewPasswordObsecure() {
     isObsecureConfirmNewPassword = !isObsecureConfirmNewPassword;
     update();
-  }       
+  }
+
+  void savePassword() async {
+    Get.back();
+    ChangePasswordInput changeProfileInput = ChangePasswordInput(
+      oldPassword: currentPassword,
+      newPassword: newPassword,
+      confirmPassword: confirmNewPassword,
+    );
+    alertLoading();
+    bool isChangeProfileSuccess = await UserService().changePassword(
+      changePassword: changeProfileInput
+    );
+    Get.back();
+    if (isChangeProfileSuccess) {
+      Get.back();
+      alertSuccess(title: 'Berhasil', subtitle: 'Ganti Password Berhasil');
+    } else {
+      alertError(title: 'Gagal', subtitle: 'Ganti Password Gagal');
+    }
+  }
 }
