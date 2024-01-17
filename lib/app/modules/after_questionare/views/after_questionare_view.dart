@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:kalorize/app/shared/widgets/full_size_button.dart';
 import 'package:kalorize/app/shared/widgets/questionare/failed_questionare.dart';
 
-import '../../../routes/app_pages.dart';
-import '../../../shared/theme/font.dart';
 import '../../../shared/widgets/questionare/success_questionare.dart';
 import '../controllers/after_questionare_controller.dart';
 
