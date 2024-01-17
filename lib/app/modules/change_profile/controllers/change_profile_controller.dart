@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kalorize/app/helpers/alert_confirm.dart';
+import 'package:kalorize/app/helpers/alert_loading.dart';
+import 'package:kalorize/app/helpers/alert_success.dart';
+import 'package:kalorize/app/services/input/change_profile_input.dart';
+import 'package:kalorize/app/services/users_service.dart';
+
+import '../../../constant/global.dart';
+import '../../../routes/app_pages.dart';
 
 class ChangeProfileController extends GetxController {
   TextEditingController namaEditingController = TextEditingController();
@@ -80,8 +87,36 @@ class ChangeProfileController extends GetxController {
   void changeProfile() {
     alertConfirm(
       title: 'Apakah kamu yakin ingin menyimpan perubahan?',
-      saveButtonTap: () {},
-      cancelButtonTap: () {},
+      saveButtonTap: saveProfile,
+      cancelButtonTap: () {
+        Get.back();
+      },
     );
   }
+
+  void saveProfile() async {
+    Get.back();
+    ChangeProfileInput changeProfileInput = ChangeProfileInput(
+      name: nama,
+      email: email,
+      nomorTelepon: noTelepon,
+    );
+    alertLoading();
+    bool isChangeProfileSuccess = await UserService().changeProfile(
+      changeProfileInput: changeProfileInput,
+
+    );
+    Get.back();
+    if(isChangeProfileSuccess) {
+      Get.offAllNamed(Routes.LOGIN);
+      storage.remove('token');
+      alertSuccess(title: 'Berhasil', subtitle: 'Ganti Profile Berhasil');
+    }else {
+      alertSuccess(title: 'Gagal', subtitle: 'Ganti Profile Gagal');
+
+    }
+  }
+ 
+
+
 }
