@@ -1,7 +1,7 @@
 import 'package:get_storage/get_storage.dart';
 
-const apiUrl = "https://985e-36-71-83-68.ngrok-free.app/api/v1";
-
+const apiUrl = "https://kalorize-api.fly.dev/api/v1";
+const mlUrl = "https://6eee-116-206-40-40.ngrok-free.app/get-recommendation";
 const Map<String, String> headers = {
   "Content-Type": "application/json",
   'Accept': 'application/json',

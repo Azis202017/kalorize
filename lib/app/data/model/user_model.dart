@@ -6,6 +6,8 @@ UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 String userModelToJson(UserModel data) => json.encode(data.toJson());
 
 class UserModel {
+    String? gym;
+    String? kodeGym;
     int? beratBadan;
     String? email;
     String? firstName;
@@ -21,6 +23,8 @@ class UserModel {
     int? umur;
 
     UserModel({
+        this.gym,
+        this.kodeGym,
         this.beratBadan,
         this.email,
         this.firstName,
@@ -37,6 +41,8 @@ class UserModel {
     });
 
     factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+        gym: json["Gym"],
+        kodeGym: json["KodeGym"],
         beratBadan: json["beratBadan"],
         email: json["email"],
         firstName: json["firstName"],
@@ -53,6 +59,8 @@ class UserModel {
     );
 
     Map<String, dynamic> toJson() => {
+        "Gym": gym,
+        "KodeGym": kodeGym,
         "beratBadan": beratBadan,
         "email": email,
         "firstName": firstName,

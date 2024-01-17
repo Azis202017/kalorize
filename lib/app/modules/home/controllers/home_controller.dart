@@ -4,13 +4,17 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:kalorize/app/helpers/date_time_format.dart';
 
+import '../../../data/model/recommendation_food.dart';
+
 class HomeController extends GetxController {
   TextEditingController dateController = TextEditingController();
   DateTime? selectedDate;
+  RecommendationFood recommendationFood = RecommendationFood();
+
   @override
   void onInit() {
     super.onInit();
-
+    getBreakfastFood();
     dateController.text = 'Hari ini, ${dateFormat(selectedDate)}';
   }
 
@@ -42,5 +46,58 @@ class HomeController extends GetxController {
 
       update();
     }
+  }
+
+  void getBreakfastFood() async {
+    recommendationFood = RecommendationFood(
+      breakfast: [
+        Breakfast(
+          kalori: 200,
+          nama: "Telur rebus",
+          protein: 72,
+          id: 20,
+        ),
+        Breakfast(
+          kalori: 80,
+          nama: "Telur Dadar",
+          protein: 70,
+          id: 50,
+        ),
+      ],
+      dinner: [
+        Breakfast(
+          kalori: 200,
+          nama: "Telur rebus",
+          protein: 72,
+          id: 80,
+        ),
+        Breakfast(
+          kalori: 80,
+          nama: "Telur Dadar",
+          protein: 70,
+          id: 100,
+        ),
+      ],
+      launch: [
+        Breakfast(
+          kalori: 200,
+          nama: "Telur rebus",
+          protein: 72,
+          id: 120,
+        ),
+        Breakfast(
+          kalori: 80,
+          nama: "Telur Dadar",
+          protein: 70,
+          id: 150,
+        ),
+      ],
+    );
+  }
+
+  final Map<int, bool> isSelected = {};
+  void toggleSelection(int itemId) {
+    isSelected[itemId] = !(isSelected[itemId] ?? false);
+    update();
   }
 }
