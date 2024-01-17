@@ -5,10 +5,10 @@ import '../../theme/font.dart';
 import 'chip_notification.dart';
 
 class IndicatorCard extends StatelessWidget {
-  final int totalCalories;
-  final int currentCalories;
-  final int totalProtein;
-  final int currentProtein;
+  final num totalCalories;
+  final num currentCalories;
+  final num totalProtein;
+  final num currentProtein;
   const IndicatorCard({
     super.key,
     this.totalCalories = 1,

@@ -7,10 +7,11 @@ import '../../theme/font.dart';
 
 class FoodCard extends StatelessWidget {
   final String name;
-  final int calori;
-  final int protein;
+  final num calori;
+  final num protein;
   final String image;
   final int itemId;
+  final String mealType;
   final void Function()? onPressed;
   const FoodCard({
     super.key,
@@ -20,13 +21,14 @@ class FoodCard extends StatelessWidget {
     this.image = "",
     this.onPressed,
     required this.itemId,
+    required this.mealType,
   });
 
   @override
   Widget build(BuildContext context) {
-    final bool isSelected =
-        (Get.find<HomeController>().isSelected[itemId] ?? false);
-
+    final int? selectedItemId =
+        Get.find<HomeController>().selectedItems[mealType];
+    final bool isSelected = (itemId == selectedItemId);
     return Container(
       width: 148,
       margin: const EdgeInsets.only(
@@ -75,11 +77,17 @@ class FoodCard extends StatelessWidget {
               ),
             ),
             child: image.isNotEmpty
-                ? Image.asset(
-                    'assets/img/$image',
+                ? Image.network(
+                    image,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    height: 140,
                   )
                 : Image.asset(
                     'assets/img/empty_image.jpg',
+                    width: double.infinity,
+                    height: 140,
+                    fit: BoxFit.cover,
                   ),
           ),
           const SizedBox(
@@ -114,7 +122,7 @@ class FoodCard extends StatelessWidget {
                         color: mainPrimary,
                       ),
                     ),
-                    Text('$calori gr', style: caption),
+                    Text('$protein gr', style: caption),
                   ],
                 ),
                 const SizedBox(
@@ -125,10 +133,22 @@ class FoodCard extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       onPressed?.call();
-                      Get.find<HomeController>().toggleSelection(itemId);
+
+                      final HomeController controller =
+                          Get.find<HomeController>();
+
+                      if (isSelected) {
+                        // Jika sudah dipilih, batalkan pemilihan
+                        controller.cancelSelection(mealType);
+                      } else {
+                        // Jika belum dipilih, pilih item
+                        controller.selectItem(mealType, itemId);
+                      }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: isSelected ? const Color(0xFF4D555C) : const Color(0xFFF94917),
+                      backgroundColor: isSelected
+                          ? const Color(0xFF4D555C)
+                          : const Color(0xFFF94917),
                     ),
                     child: Text(
                       isSelected ? 'Cancel' : 'Pilih',

@@ -19,15 +19,20 @@ class ListOfLaunchFood extends StatelessWidget {
       height: 280,
       child: ListView.builder(
         itemCount: length,
+        clipBehavior: Clip.none,
+
         scrollDirection: Axis.horizontal,
         itemBuilder: (_, index) {
-          var data = food?.launch?[index];
+          var data = food?.lunch?[index];
           return FoodCard(
             name: data?.nama ?? "",
             calori: data?.kalori ?? 0,
             protein: data?.protein ?? 0,
             itemId: data?.id ?? 0,
-            onPressed: () => onPressed?.call(data ?? Breakfast()),
+            mealType: "lunch",
+            image: data?.foto ?? "",
+
+            onPressed: () => onPressed?.call(data!),
           );
         },
       ),
