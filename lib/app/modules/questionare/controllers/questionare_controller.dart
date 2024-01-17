@@ -187,7 +187,6 @@ class QuestionareController extends GetxController {
     );
     alertLoading();
     bool isSuccessfullFillQuestionare = await QuestionareService().fillQuestion(questionareInput: questionareInput);
-    print(isSuccessfullFillQuestionare);
     Get.back();
     if(isSuccessfullFillQuestionare) {
       Get.offAllNamed(Routes.AFTER_QUESTIONARE, arguments :{
