@@ -57,7 +57,6 @@ class HomeController extends GetxController {
         dateController.text = dateFormat(selectedDate);
       }
 
-      print(formattedPickedDate == formattedCurrentDate);
 
       update();
     }
