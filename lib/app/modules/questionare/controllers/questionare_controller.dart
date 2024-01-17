@@ -1,8 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:kalorize/app/helpers/alert_loading.dart';
 import 'package:kalorize/app/services/questionare_service.dart';
 
 import '../../../data/model/user_model.dart';
+import '../../../routes/app_pages.dart';
 import '../../../services/input/questionare_input.dart';
 import '../../../services/users_service.dart';
 
@@ -183,7 +185,15 @@ class QuestionareController extends GetxController {
       targetKalori: currentTarget,
       tinggiBadan: int.parse(tinggiBadan),
     );
-    await QuestionareService().fillQuestion(questionareInput: questionareInput);
+    alertLoading();
+    bool isSuccessfullFillQuestionare = await QuestionareService().fillQuestion(questionareInput: questionareInput);
+    print(isSuccessfullFillQuestionare);
+    Get.back();
+    if(isSuccessfullFillQuestionare) {
+      Get.offAllNamed(Routes.AFTER_QUESTIONARE, arguments :{
+        "isSuccess" : isSuccessfullFillQuestionare
+      });
+    }
   }
 
   @override
@@ -218,6 +228,7 @@ class QuestionareController extends GetxController {
 
     update();
   }
+
   @override
   void onInit() {
     getUserData();
