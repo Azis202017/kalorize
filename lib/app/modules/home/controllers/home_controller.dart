@@ -2,20 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:kalorize/app/data/model/user_model.dart';
 import 'package:kalorize/app/helpers/date_time_format.dart';
+import 'package:kalorize/app/services/food_recommendation_service.dart';
+import 'package:kalorize/app/services/input/recommendation_input.dart';
+import 'package:kalorize/app/services/users_service.dart';
 
 import '../../../data/model/recommendation_food.dart';
 
 class HomeController extends GetxController {
   TextEditingController dateController = TextEditingController();
   DateTime? selectedDate;
-  RecommendationFood recommendationFood = RecommendationFood();
-
+  RecommendationFood? recommendationFood = RecommendationFood();
+  UserModel? user = UserModel();
+  num currentCalories = 0.0;
+  num currentProtein = 0.0;
+  num totalCalories = 0.0;
+  num totalProtein = 0.0;
+  bool isLoading = true;
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    await getUser();
     getBreakfastFood();
     dateController.text = 'Hari ini, ${dateFormat(selectedDate)}';
+  }
+
+  Future<void> getUser() async {
+    user = await UserService().fetchUserData();
+    update();
   }
 
   Future<void> showDate() async {
@@ -49,55 +64,119 @@ class HomeController extends GetxController {
   }
 
   void getBreakfastFood() async {
-    recommendationFood = RecommendationFood(
-      breakfast: [
-        Breakfast(
-          kalori: 200,
-          nama: "Telur rebus",
-          protein: 72,
-          id: 20,
-        ),
-        Breakfast(
-          kalori: 80,
-          nama: "Telur Dadar",
-          protein: 70,
-          id: 50,
-        ),
-      ],
-      dinner: [
-        Breakfast(
-          kalori: 200,
-          nama: "Telur rebus",
-          protein: 72,
-          id: 80,
-        ),
-        Breakfast(
-          kalori: 80,
-          nama: "Telur Dadar",
-          protein: 70,
-          id: 100,
-        ),
-      ],
-      launch: [
-        Breakfast(
-          kalori: 200,
-          nama: "Telur rebus",
-          protein: 72,
-          id: 120,
-        ),
-        Breakfast(
-          kalori: 80,
-          nama: "Telur Dadar",
-          protein: 70,
-          id: 150,
-        ),
-      ],
+    RecommendationInput recommendationInput = RecommendationInput(
+      age: user?.umur ?? 0,
+      gender: user?.jenisKelamin ?? 0,
+      activityLevel: user?.frekuensiGym ?? 0,
+      target: user?.targetKalori ?? 0,
+      height: user?.tinggiBadan ?? 0,
+      weight: user?.beratBadan ?? 0,
     );
+
+    recommendationFood = await FoodRecommendationService()
+        .getRecommendation(recommendationInput: recommendationInput);
+    update();
+    isLoading = false;
+
+    totalProtein = recommendationFood?.totalProtein ?? 0.0;
+    totalCalories = recommendationFood?.totalCalories ?? 0.0;
+    update();
   }
 
-  final Map<int, bool> isSelected = {};
-  void toggleSelection(int itemId) {
-    isSelected[itemId] = !(isSelected[itemId] ?? false);
-    update();
+  Map<String, int?> selectedItems = {
+    'breakfast': null,
+    'lunch': null,
+    'dinner': null,
+  };
+
+  void selectItem(String mealType, int itemId) {
+    if (selectedItems[mealType] != null) {
+      cancelSelection(mealType);
+    }
+
+    int selectedIndex = -1;
+
+    // Cari indeks dari item yang dipilih di dalam daftar makanan
+    switch (mealType) {
+      case 'breakfast':
+        selectedIndex = recommendationFood?.breakfast
+                ?.indexWhere((item) => item.id == itemId) ??
+            -1;
+        break;
+      case 'lunch':
+        selectedIndex = recommendationFood?.lunch
+                ?.indexWhere((item) => item.id == itemId) ??
+            -1;
+        break;
+      case 'dinner':
+        selectedIndex = recommendationFood?.dinner
+                ?.indexWhere((item) => item.id == itemId) ??
+            -1;
+        break;
+    }
+
+    // Tambahkan kalori dan protein dari item yang dipilih jika indeks valid
+    if (selectedIndex >= 0) {
+      if (mealType == 'breakfast') {
+        currentCalories +=
+            recommendationFood?.breakfast?[selectedIndex].kalori ?? 0;
+        currentProtein +=
+            recommendationFood?.breakfast?[selectedIndex].protein ?? 0;
+      } else if (mealType == 'lunch') {
+        currentCalories +=
+            recommendationFood?.lunch?[selectedIndex].kalori ?? 0;
+        currentProtein +=
+            recommendationFood?.lunch?[selectedIndex].protein ?? 0;
+      } else if (mealType == 'dinner') {
+        currentCalories +=
+            recommendationFood?.dinner?[selectedIndex].kalori ?? 0;
+        currentProtein +=
+            recommendationFood?.dinner?[selectedIndex].protein ?? 0;
+      }
+
+      // Pilih item dengan indeks
+      selectedItems[mealType] = selectedIndex;
+      update();
+    }
+  }
+
+  void cancelSelection(String mealType) {
+    // Ambil indeks item yang akan dibatalkan
+    int? canceledItemIndex = selectedItems[mealType];
+
+    if (canceledItemIndex != null) {
+      // Hapus kalori dan protein dari item yang dibatalkan jika indeks valid
+      switch (mealType) {
+        case 'breakfast':
+          if (canceledItemIndex <
+              (recommendationFood?.breakfast?.length ?? 0)) {
+            currentCalories -=
+                recommendationFood?.breakfast?[canceledItemIndex].kalori ?? 0;
+            currentProtein -=
+                recommendationFood?.breakfast?[canceledItemIndex].protein ?? 0;
+          }
+          break;
+        case 'lunch':
+          if (canceledItemIndex < (recommendationFood?.lunch?.length ?? 0)) {
+            currentCalories -=
+                recommendationFood?.lunch?[canceledItemIndex].kalori ?? 0;
+            currentProtein -=
+                recommendationFood?.lunch?[canceledItemIndex].protein ?? 0;
+          }
+          break;
+        case 'dinner':
+          if (canceledItemIndex < (recommendationFood?.dinner?.length ?? 0)) {
+            currentCalories -=
+                recommendationFood?.dinner?[canceledItemIndex].kalori ?? 0;
+            currentProtein -=
+                recommendationFood?.dinner?[canceledItemIndex].protein ?? 0;
+          }
+          break;
+      }
+
+      // Batalkan pemilihan
+      selectedItems[mealType] = null;
+      update();
+    }
   }
 }

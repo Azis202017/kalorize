@@ -5,7 +5,7 @@ import 'package:kalorize/app/shared/widgets/home/food_card.dart';
 class ListOfDinnerFood extends StatelessWidget {
   final RecommendationFood? food;
   final int length;
-  final void Function()? onPressed;
+  final void Function(Breakfast)? onPressed;
   const ListOfDinnerFood({
     super.key,
     this.food,
@@ -15,11 +15,13 @@ class ListOfDinnerFood extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return SizedBox(
       height: 280,
       child: ListView.builder(
         itemCount: length,
         scrollDirection: Axis.horizontal,
+        clipBehavior: Clip.none,
         itemBuilder: (_, index) {
           var data = food?.dinner?[index];
           return FoodCard(
@@ -27,7 +29,9 @@ class ListOfDinnerFood extends StatelessWidget {
             calori: data?.kalori ?? 0,
             protein: data?.protein ?? 0,
             itemId: data?.id ?? 0,
-            onPressed: onPressed,
+            onPressed:  () => onPressed?.call(data!),
+            image: data?.foto ?? "",
+            mealType: "dinner",
           );
         },
       ),

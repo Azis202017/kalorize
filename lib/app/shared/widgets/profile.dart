@@ -11,12 +11,14 @@ class ProfileWidget extends StatelessWidget {
   final XFile? foto;
   final String kodeGym;
   final String namaGym;
+  final void Function()? onPressed;
   const ProfileWidget({
     super.key,
     required this.name,
     required this.kodeGym,
     required this.namaGym,
     this.foto,
+    this.onPressed,
   });
 
   @override
@@ -24,33 +26,46 @@ class ProfileWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Center(
-          child: SizedBox(
-            width: 120,
-            height: 120,
-            child: Stack(
-              children: [
-                foto != null
-                    ? Image.file(File(
-                        foto?.path ?? "",
-                      ))
-                    : Image.asset(
-                        'assets/img/default_profile.png',
-                      ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: CircleAvatar(
-                    backgroundColor: mainPrimary,
-                    child: Center(
-                      child: Image.asset(
-                        'assets/img/camera.png',
-                        width: 24,
-                        height: 24,
+        GestureDetector(
+          onTap: onPressed,
+          child: Center(
+            child: SizedBox(
+              width: 120,
+              height: 120,
+              child: Stack(
+                children: [
+                  foto != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(
+                            120,
+                          ),
+                          child: Image.file(
+                            width: 120,
+                            height: 120,
+                            File(
+                              foto?.path ?? "",
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : Image.asset(
+                          'assets/img/default_profile.png',
+                        ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: CircleAvatar(
+                      backgroundColor: mainPrimary,
+                      child: Center(
+                        child: Image.asset(
+                          'assets/img/camera.png',
+                          width: 24,
+                          height: 24,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -71,7 +86,7 @@ class ProfileWidget extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                height:23,
+                height: 23,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: backgroundSecondary),

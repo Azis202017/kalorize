@@ -230,7 +230,7 @@ class QuestionareView extends GetView<QuestionareController> {
                           title: 'Simpan',
                           height: 44,
                           onPressed: controller.activeButtonSave()
-                              ?controller.saveQuestionare
+                              ? controller.saveQuestionare
                               : null,
                         ),
                       ],

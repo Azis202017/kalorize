@@ -16,6 +16,7 @@ class TextInput extends StatelessWidget {
   final FocusNode? focusNode;
   final TextInputType? textInputType;
   final bool readOnly;
+  final bool isShowCalendar;
 
   const TextInput({
     Key? key,
@@ -31,6 +32,7 @@ class TextInput extends StatelessWidget {
     this.textInputType,
     this.onTap,
     this.readOnly = false,
+    this.isShowCalendar = false,
   }) : super(key: key);
 
   @override
@@ -97,14 +99,17 @@ class TextInput extends StatelessWidget {
         );
       }
     } else {
-      // Tambahkan ikon kalender di sini
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Image.asset(
-          'assets/img/calendar.png',
-          width:20, height:20,
-        ),
-      );
+      if (isShowCalendar) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Image.asset(
+            'assets/img/calendar.png',
+            width: 20,
+            height: 20,
+          ),
+        );
+      }
     }
+    return null;
   }
 }

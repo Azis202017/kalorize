@@ -1,7 +1,11 @@
 import 'package:get/get.dart';
 
+import '../modules/after_questionare/bindings/after_questionare_binding.dart';
+import '../modules/after_questionare/views/after_questionare_view.dart';
 import '../modules/change_profile/bindings/change_profile_binding.dart';
 import '../modules/change_profile/views/change_profile_view.dart';
+import '../modules/detail_food/bindings/detail_food_binding.dart';
+import '../modules/detail_food/views/detail_food_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -26,7 +30,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.LOGIN;
 
   static final routes = [
     GetPage(
@@ -73,6 +77,16 @@ class AppPages {
       name: _Paths.QUESTIONARE,
       page: () => const QuestionareView(),
       binding: QuestionareBinding(),
+    ),
+    GetPage(
+      name: _Paths.AFTER_QUESTIONARE,
+      page: () => const AfterQuestionareView(),
+      binding: AfterQuestionareBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_FOOD,
+      page: () => const DetailFoodView(),
+      binding: DetailFoodBinding(),
     ),
   ];
 }

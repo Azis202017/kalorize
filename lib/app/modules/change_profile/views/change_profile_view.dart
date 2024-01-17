@@ -30,7 +30,7 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                   children: [
                     TextInput(
                       textInputType: TextInputType.name,
-                      title: 'NamaLengkap',
+                      title: 'Nama Lengkap',
                       textEditingController: controller.namaEditingController,
                       validator: controller.onValidateNama,
                       onEditingComplete: controller.onSubmittedNama,
