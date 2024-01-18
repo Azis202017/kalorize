@@ -14,7 +14,7 @@ Glorious Satria Dhamang Aji - Hustler / Hacker
 
 ### **CTO - Tech and Product**
 
-Azis Al-Ayyubbi - Hacker
+Abdul Azis Al Ayubbi - Hacker
 
 ### **CAIO - Artificial Intellegence and Data**
 
@@ -39,7 +39,12 @@ Menjalankan project
 ```bash
 flutter run
 ```
+Link APK
 
+<a>
+https://drive.google.com/drive/folders/1Ak3KQOIQ9Vg4B1r9dA6YMl3yWdnaJtkk
+
+</a>
 ## Screenshots
 
 <img src="screenshot/onboarding1.png" width="1000" height="1000" alt="Onboarding Splash Screen">
