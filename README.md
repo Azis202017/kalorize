@@ -41,10 +41,9 @@ flutter run
 ```
 Link APK
 
-<a>
-https://drive.google.com/drive/folders/1Ak3KQOIQ9Vg4B1r9dA6YMl3yWdnaJtkk
 
-</a>
+[Aplikasi](https://drive.google.com/drive/folders/1Ak3KQOIQ9Vg4B1r9dA6YMl3yWdnaJtkk)
+
 ## Screenshots
 
 <img src="screenshot/onboarding1.png" width="1920" height="1920" alt="Onboarding Splash Screen">
