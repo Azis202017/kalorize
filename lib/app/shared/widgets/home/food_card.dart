@@ -29,6 +29,7 @@ class FoodCard extends StatelessWidget {
     final int? selectedItemId =
         Get.find<HomeController>().selectedItems[mealType];
     final bool isSelected = (itemId == selectedItemId);
+    print(isSelected);
     return Container(
       width: 148,
       margin: const EdgeInsets.only(
@@ -93,12 +94,19 @@ class FoodCard extends StatelessWidget {
           const SizedBox(
             height: 12,
           ),
-          Center(
-            child: Text(
-              '$name ',
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: labelSmall,
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 8.0,
+              right: 8,
+            ),
+            child: Center(
+              child: Text(
+                '$name ',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: labelSmall,
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
           const SizedBox(
@@ -129,32 +137,37 @@ class FoodCard extends StatelessWidget {
                   height: 8,
                 ),
                 SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      onPressed?.call();
+                    width: double.infinity,
+                    // Bagian widget ElevatedButton di dalam widget FoodCard
+                    child: ElevatedButton(
+                      onPressed: () {
+                        onPressed?.call();
 
-                      final HomeController controller =
-                          Get.find<HomeController>();
+                        final HomeController controller =
+                            Get.find<HomeController>();
 
-                      if (isSelected) {
-                        // Jika sudah dipilih, batalkan pemilihan
-                        controller.cancelSelection(mealType);
-                      } else {
-                        // Jika belum dipilih, pilih item
-                        controller.selectItem(mealType, itemId);
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: isSelected
-                          ? const Color(0xFF4D555C)
-                          : const Color(0xFFF94917),
-                    ),
-                    child: Text(
-                      isSelected ? 'Cancel' : 'Pilih',
-                    ),
-                  ),
-                ),
+                        if (isSelected) {
+                          // Jika sudah dipilih, batalkan pemilihan
+                          controller.cancelSelection(mealType);
+                        } else {
+                          // Jika belum dipilih, pilih item
+                          controller.selectItem(mealType, itemId);
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: isSelected
+                            ? const Color(0xFF4D555C) // Warna saat item dipilih
+                            : const Color(
+                                0xFFF94917), // Warna saat item belum dipilih
+                      ),
+                      child: Text(
+                        isSelected ? 'Cancel' : 'Pilih',
+                        style: TextStyle(
+                          // Ganti warna teks sesuai kondisi isSelected
+                          color: isSelected ? Colors.white : Colors.white,
+                        ),
+                      ),
+                    )),
                 const SizedBox(
                   height: 12,
                 ),

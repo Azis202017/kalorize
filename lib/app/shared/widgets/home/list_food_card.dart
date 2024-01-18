@@ -30,9 +30,12 @@ class ListOfFoodBreakfastCard extends StatelessWidget {
           itemBuilder: (_, index) {
             var data = food?.breakfast?[index];
             return GestureDetector(
-              onTap: () => Get.toNamed(Routes.DETAIL_FOOD, arguments: {
-                'food': data,
-              }),
+              onTap: () => Get.toNamed(
+                Routes.DETAIL_FOOD,
+                arguments: {
+                  'food': data,
+                },
+              ),
               child: FoodCard(
                 name: data?.nama ?? "",
                 calori: data?.kalori ?? 0,
