@@ -24,4 +24,4 @@ Detailed API documentation is available, providing insights into the various end
 ## Docker Container
 The application is containerized using Docker, facilitating easy deployment and scalability. The Docker container can be pulled and run with the necessary environment setup, abstracting complexities and ensuring a consistent runtime environment.
 
-*Note:* The 'Food Dataset' used in this application is not available in the GitHub repository due to confidentiality constraints. For more information, please contact us.
+**Note:** The 'Food Dataset' used in this application is not available in the GitHub repository due to confidentiality constraints. For more information, please contact us.
