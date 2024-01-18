@@ -1,0 +1,59 @@
+steps:
+# prepare python
+- name: python
+  entrypoint: pip
+  args: ["install", "-r", "requirements.txt", "--user"]
+- name: python
+  entrypoint: python
+  args:
+  - '-m'
+  - 'twine'
+  - 'upload'
+  - '--repository-url'
+  - 'https://us-central1-python.pkg.dev/kalorize-411312/kalorize/'
+  - 'dist/*'
+  - --verbose
+
+# Run unit tests
+- name: python
+  entrypoint: python
+  args: ["-m", "pytest", "--junitxml=${SHORT_SHA}_test_log.xml"] 
+
+# Docker Build
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t',
+         'us-central1-docker.pkg.dev/kalorize-411312/kalorize/kalorize-ml:${SHORT_SHA}', '.']
+
+# Docker push to Google Artifact Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push',  'us-central1-docker.pkg.dev/kalorize-411312/kalorize/kalorize-ml:${SHORT_SHA}']
+
+# Deploy to Cloud Run
+- name: google/cloud-sdk
+  args: ['gcloud', 'run', 'deploy', 'kalorize-${SHORT_SHA}',
+         '--image=us-central1-docker.pkg.dev/kalorize-411312/kalorize/kalorize-ml:${SHORT_SHA}',
+         '--region', 'us-central1', '--platform', 'managed',
+         '--allow-unauthenticated']
+
+# Save test logs to Google Cloud Storage
+artifacts:
+  objects:
+    location: gs://${_BUCKET_NAME}/
+    paths:
+      - ${SHORT_SHA}_test_log.xml
+
+# # Build the container image
+# - name: 'us.gcr.io/cloud-builders/docker'
+#   args: ['build', '-t', 'us.gcr.io/kalorize-411312/kalorize/kalorize-ml:$COMMIT_SHA','.']
+
+# # Push the container image to Container Registry
+# - name: 'us.gcr.io/cloud-builders/docker'
+#   args: ['push', 'us.gcr.io/kalorize-411312/kalorize/kalorize-ml:$COMMIT_SHA']
+
+# Deploy container image to Cloud Run
+# - name: "us.gcr.io/google.com/cloudsdktool/cloud-sdk"
+#   entrypoint: gcloud
+#   args: ['beta', 'run', 'deploy', 'app', '--image', 'us.gcr.io/kalorize-411312/kalorize-ml:$COMMIT_SHA', '--region', 'us-central1', '--allow-unauthenticated', '--platform', 'managed']
+
+images:
+  - us-central1-docker.pkg.dev/kalorize-411312/kalorize/kalorize-ml:${SHORT_SHA}

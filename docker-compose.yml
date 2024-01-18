@@ -1,0 +1,11 @@
+version: "3.11.4"
+services:
+  app:
+    build: .
+    environment:
+      - MY_ENV_VAR=val
+    command: gunicorn --config gunicorn_conf.py app:app
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/back-end
