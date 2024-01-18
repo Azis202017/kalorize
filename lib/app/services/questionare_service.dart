@@ -10,7 +10,7 @@ class QuestionareService {
     required QuestionareInput questionareInput,
   }) async {
     Map<String, dynamic> body = {
-      'idUser': questionareInput.idUser,
+      'IdUser': questionareInput.idUser,
       'umur': questionareInput.umur,
       'beratBadan': questionareInput.beratBadan,
       'tinggiBadan': questionareInput.tinggiBadan,

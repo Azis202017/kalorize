@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:kalorize/app/data/model/detail_food.dart';
 import 'package:kalorize/app/data/model/recommendation_food.dart';
 import 'package:kalorize/app/services/input/recommendation_input.dart';
 
@@ -19,7 +20,7 @@ class FoodRecommendationService {
       'target': recommendationInput.target,
     };
     final response = await post(
-      Uri.parse(mlUrl),
+      Uri.parse(mlUrlTF),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -29,6 +30,24 @@ class FoodRecommendationService {
     if (response.statusCode == 200) {
       return RecommendationFood.fromJson(jsonDecode(response.body));
     }
+    return null;
+  }
+
+  Future<DetailFood?> getDetailFood({required int? id}) async {
+    try {
+      String url = "$apiUrl/makanan/$id";
+      var response = await get(
+        Uri.parse(url),
+        headers: {
+          'Authorization' : 'Bearer ${storage.read('token')}'
+        }
+      );
+      print(response.body);
+      if(response.statusCode == 200) {
+        return DetailFood.fromJson(jsonDecode(response.body)['data']);
+      }
+      return null;
+    } catch (e) {}
     return null;
   }
 }

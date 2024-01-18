@@ -176,22 +176,29 @@ class QuestionareController extends GetxController {
   }
 
   void saveQuestionare() async {
-    QuestionareInput questionareInput = QuestionareInput(
-      idUser: user?.idUser ?? "",
-      umur: int.parse(umur),
-      beratBadan: int.parse(beratBadan),
-      frekuensiGym: currentFrequencyGym,
-      jenisKelamin: currentGender,
-      targetKalori: currentTarget,
-      tinggiBadan: int.parse(tinggiBadan),
-    );
-    alertLoading();
-    bool isSuccessfullFillQuestionare = await QuestionareService().fillQuestion(questionareInput: questionareInput);
-    Get.back();
-    if(isSuccessfullFillQuestionare) {
-      Get.offAllNamed(Routes.AFTER_QUESTIONARE, arguments :{
-        "isSuccess" : isSuccessfullFillQuestionare
-      });
+    if (user != null) {
+      QuestionareInput questionareInput = QuestionareInput(
+        idUser: user?.idUser ?? "",
+        umur: int.parse(umur),
+        beratBadan: int.parse(beratBadan),
+        frekuensiGym: currentFrequencyGym,
+        jenisKelamin: currentGender,
+        targetKalori: currentTarget,
+        tinggiBadan: int.parse(tinggiBadan),
+      );
+      alertLoading();
+      bool isSuccessfullFillQuestionare = await QuestionareService()
+          .fillQuestion(questionareInput: questionareInput);
+      Get.back();
+      if (isSuccessfullFillQuestionare) {
+        Get.offAllNamed(Routes.AFTER_QUESTIONARE,
+            arguments: {"isSuccess": isSuccessfullFillQuestionare});
+      } else {
+        Get.offAllNamed(
+          Routes.AFTER_QUESTIONARE,
+          arguments: {"isSuccess": isSuccessfullFillQuestionare},
+        );
+      }
     }
   }
 
@@ -222,15 +229,15 @@ class QuestionareController extends GetxController {
     }
   }
 
-  void getUserData() async {
+  Future<void> getUserData() async {
     user = await UserService().fetchUserData();
-
+    print(user);
     update();
   }
 
   @override
-  void onInit() {
-    getUserData();
+  void onInit() async {
     super.onInit();
+    await getUserData();
   }
 }

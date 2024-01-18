@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:kalorize/app/shared/widgets/full_size_button.dart';
 import 'package:kalorize/app/shared/widgets/text_input.dart';
 
+import '../../../routes/app_pages.dart';
+import '../../../shared/widgets/rich_second_text.dart';
 import '../../../shared/widgets/welcome_widget.dart';
 import '../controllers/register_controller.dart';
 
@@ -23,7 +25,6 @@ class RegisterView extends GetView<RegisterController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  
                   const SizedBox(
                     height: 42,
                   ),
@@ -102,7 +103,17 @@ class RegisterView extends GetView<RegisterController> {
                   ).animate().fadeIn(),
                   PrimaryButton(
                     title: "Daftar",
-                    onPressed: controller.isActiveButtonDaftar ? controller.register : null,
+                    onPressed: controller.isActiveButtonDaftar
+                        ? controller.register
+                        : null,
+                  ).animate().fadeIn(),
+                  const SizedBox(
+                    height: 28,
+                  ).animate().fadeIn(),
+                  RichSecondText(
+                    text1: "Sudah mempunyai akun?  ",
+                    text2: "Login disini",
+                    onTap: () => Get.offAllNamed(Routes.LOGIN),
                   ).animate().fadeIn(),
                 ],
               ),

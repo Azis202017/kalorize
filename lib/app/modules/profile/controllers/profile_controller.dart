@@ -13,7 +13,6 @@ class ProfileController extends GetxController {
   final count = 0.obs;
 
   bool isLoading = true;
-
   @override
   void onInit() {
     getUserData();
@@ -38,13 +37,21 @@ class ProfileController extends GetxController {
   void getUserData() async {
     user = await UserService().fetchUserData();
     isLoading = false;
-
     update();
   }
 
   void getFoto() async {
+    isLoading = true;
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    
+    isLoading = true;
+    update();
+    bool isSuccesFotoSave = await UserService().changeFoto(imageFile: image, alias: 'foto');
+    isLoading = false;
+    if(isSuccesFotoSave) {
+      print('success');
+    }else {
+      print("gagal");
+    }
     update();
   }
 }

@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:kalorize/app/services/input/change_profile_input.dart';
 
 import '../constant/global.dart';
@@ -19,6 +21,7 @@ class UserService {
       if (response.statusCode == 200) {
         return UserModel.fromJson(jsonDecode(response.body)['data']);
       }
+      print(storage.read('token'));
       return null;
     } catch (e) {
       return throw Exception(e);
@@ -69,5 +72,36 @@ class UserService {
       return true;
     }
     return false;
+  }
+
+  Future<bool> changeFoto({
+    String? alias,
+    XFile? imageFile,
+  }) async {
+    GetStorage storage = GetStorage();
+    try {
+      var url = "$apiUrl/edit-photo";
+      final request = http.MultipartRequest('PUT', Uri.parse(url));
+      request.headers['Authorization'] = 'Bearer ${storage.read('token')}';
+      request.headers['Content-Type'] = 'multipart/form-data';
+      final file = await http.MultipartFile.fromPath(
+        'file',
+        '${imageFile?.path}',
+      );
+      request.files.add(file);
+      request.fields['alias'] = "$alias";
+
+      final response = await request.send();
+      List<int> bytes = await response.stream.toBytes();
+      String responseBody = utf8.decode(bytes);
+      print(responseBody);
+
+      // if (response.statusCode == 200) {
+      //   return true;
+      // }
+      return false;
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 }
