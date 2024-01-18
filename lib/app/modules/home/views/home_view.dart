@@ -13,11 +13,18 @@ import '../../../shared/widgets/home/title_description.dart';
 import '../../../shared/widgets/text_input.dart';
 import '../controllers/home_controller.dart';
 
-class HomeView extends GetView<HomeController> {
+class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeController(), permanent: true);
+    final HomeController controller =
+        Get.put(HomeController(), permanent: true);
     return GetBuilder<HomeController>(builder: (_) {
       return controller.isLoading
           ? const Material(child: Center(child: CircularProgressIndicator()))
@@ -25,7 +32,6 @@ class HomeView extends GetView<HomeController> {
               child: Scaffold(
                 body: RefreshIndicator(
                   onRefresh: () async {
-                    controller.getBreakfastFood();
                     controller.getUser();
                   },
                   child: SingleChildScrollView(
@@ -41,6 +47,7 @@ class HomeView extends GetView<HomeController> {
                           HeaderProfile(
                             name:
                                 '${controller.user?.firstName} ${controller.user?.lastName}',
+                            foto: controller.user?.foto ?? "",
                             onPressed: () => Get.toNamed(
                               Routes.PROFILE,
                             ),
@@ -71,6 +78,9 @@ class HomeView extends GetView<HomeController> {
                             subtitle:
                                 "Jangan lupa sarapan sebelum jam 9 pagi ya 💪",
                           ),
+                          const SizedBox(
+                            height: 12,
+                          ),
                           ListOfFoodBreakfastCard(
                             food: controller.recommendationFood,
                             length: controller
@@ -99,6 +109,9 @@ class HomeView extends GetView<HomeController> {
                             title: "Makan Siang 🍴",
                             subtitle:
                                 "Tetep berenergi dengan makan di jam 11.00 - 14.00 😊",
+                          ),
+                          const SizedBox(
+                            height: 12,
                           ),
                           ListOfLaunchFood(
                             food: controller.recommendationFood,
@@ -129,6 +142,9 @@ class HomeView extends GetView<HomeController> {
                           const TitleDescription(
                             title: "Makan Malam 🍽",
                             subtitle: "Wajib makan sebelum jam 20.00 ya!! 🙌",
+                          ),
+                          const SizedBox(
+                            height: 12,
                           ),
                           ListOfDinnerFood(
                             food: controller.recommendationFood,
