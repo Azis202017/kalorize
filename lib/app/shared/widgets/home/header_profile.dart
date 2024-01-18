@@ -27,11 +27,18 @@ class HeaderProfile extends StatelessWidget {
                 40,
               ),
             ),
-            child: foto.isEmpty
-                ? Image.asset(
-                    'assets/img/default.png',
-                  )
-                : Image.network(foto),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(48),
+              child: foto.isEmpty
+                  ? Image.asset(
+                      'assets/img/default.png',
+                      fit: BoxFit.cover,
+                    )
+                  : Image.network(
+                      foto,
+                      fit: BoxFit.cover,
+                    ),
+            ),
           ),
           const SizedBox(
             width: 16,
