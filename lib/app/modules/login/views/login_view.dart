@@ -58,21 +58,19 @@ class LoginView extends GetView<LoginController> {
                   const SizedBox(
                     height: 40,
                   ),
-                  RichSecondText(
-                    text1: "Tidak mempunyai akun? ",
-                    text2: "Daftar disini",
-                    onTap: controller.toRegisterPage,
-                  ).animate().fadeIn(),
-                  const SizedBox(
-                    height: 8,
-                  ),
                   PrimaryButton(
                     title: 'Masuk',
                     onPressed: controller.login,
                   ).animate().fadeIn(),
                   const SizedBox(
-                    height: 28,
+                    height: 8,
                   ),
+                 
+                  RichSecondText(
+                    text1: "Tidak mempunyai akun? ",
+                    text2: "Daftar disini",
+                    onTap: controller.toRegisterPage,
+                  ).animate().fadeIn(),
                 ],
               ),
             ),
