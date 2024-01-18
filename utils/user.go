@@ -8,6 +8,7 @@ type UserRequest struct {
 	PasswordConfirmation string `json:"password_confirmation"`
 	JenisKelamin         int    `json:"jenis_kelamin"`
 	Role                 string `json:"role"`
+	NoTelepon            string `json:"no_telepon"`
 	ReferalCode          string `json:"referal_code"`
 	Umur                 int    `json:"umur"`
 	BeratBadan           int    `json:"berat_badan"`
@@ -15,4 +16,17 @@ type UserRequest struct {
 	FrekuensiGym         int    `json:"frekuensi_gym"`
 	TargetKalori         int    `json:"target_kalori"`
 	Foto                 string `json:"foto"`
+	FotoUrl              string `json:"foto_url"`
+}
+
+func ValidateAndAssign(target *string, source string) {
+	if source != "" {
+		*target = source
+	}
+}
+
+func ValidateAndAssignInt(target *int, source *int) {
+	if source != nil {
+		*target = *source
+	}
 }

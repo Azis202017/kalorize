@@ -15,13 +15,15 @@ import (
 type authService struct {
 	authRepo     repositories.UserRepository
 	usedCodeRepo repositories.UsedCodeRepository
+	tokenRepo    repositories.TokenRepository
+	gymRepo      repositories.GymRepository
 }
 
 func (service *authService) Login(email, password string) utils.Response {
 	var response utils.Response
 	if email == "" || password == "" {
 		response.StatusCode = 400
-		response.Messages = "Username dan password tidak boleh kosong"
+		response.Messages = "email dan password tidak boleh kosong"
 		response.Data = nil
 		return response
 	}
@@ -47,19 +49,40 @@ func (service *authService) Login(email, password string) utils.Response {
 		response.Data = nil
 		return response
 	}
-	token, err := utils.GenerateJWTAccessToken(user.Fullname, user.Email, user.Role, "kalorize")
+	AccessToken, err := utils.GenerateJWTAccessToken(user.Fullname, user.Email, user.Role, "kalorize")
 	if err != nil {
 		response.StatusCode = 500
 		response.Messages = "Token generation failed"
 		response.Data = nil
 		return response
 	}
+	refreshToken, err := utils.GenerateJWTRefreshToken(user.Fullname, user.Email, user.Role, "kalorize")
+	if err != nil {
+		response.StatusCode = 500
+		response.Messages = "Token generation failed"
+		response.Data = nil
+		return response
+	}
+	token := models.Token{
+		IdToken:      uuid.New(),
+		AccessToken:  AccessToken,
+		RefreshToken: refreshToken,
+		UserId:       user.IdUser,
+	}
+	err = service.tokenRepo.CreateNewToken(token)
+	if err != nil {
+		response.StatusCode = 500
+		response.Messages = "Token creation failed"
+		response.Data = nil
+		return response
+	}
+
 	response.StatusCode = 200
 	response.Messages = "success"
-
 	response.Data = map[string]interface{}{
-		"token": token,
-		"role":  user.Role,
+		"accessToken":  AccessToken,
+		"refreshToken": refreshToken,
+		"role":         user.Role,
 	}
 	return response
 }
@@ -105,27 +128,49 @@ func (service *authService) Register(registerRequest utils.UserRequest, gymKode 
 		response.Data = nil
 		return response
 	}
-	token, err := utils.GenerateJWTAccessToken(registerRequest.Fullname, registerRequest.Email, registerRequest.Role, "kalorize")
+	accessToken, err := utils.GenerateJWTAccessToken(registerRequest.Fullname, registerRequest.Email, registerRequest.Role, "kalorize")
 	if err != nil {
 		response.StatusCode = 500
 		response.Messages = "Token generation failed"
 		response.Data = nil
 		return response
 	}
-	response.Data = map[string]interface{}{
-		"token": token,
+
+	refreshtoken, err := utils.GenerateJWTRefreshToken(registerRequest.Fullname, registerRequest.Email, registerRequest.Role, "kalorize")
+	if err != nil {
+		response.StatusCode = 500
+		response.Messages = "Token generation failed"
+		response.Data = nil
+		return response
 	}
-	uuid := uuid.New()
+	userId := uuid.New()
 	user = models.User{
-		IdUser:      uuid,
+		IdUser:      userId,
 		Fullname:    registerRequest.Fullname,
 		Email:       registerRequest.Email,
 		Umur:        registerRequest.Umur,
 		ReferalCode: utils.GenerateReferalCode(registerRequest.Fullname),
 		Password:    string(hashedPassword),
+		Role:        registerRequest.Role,
+	}
+	uuidString := "10bedc93-46f9-4111-87ec-c9ad948aff81"
+	parsedUUID, err := uuid.Parse(uuidString)
+	if err != nil {
+		response.StatusCode = 500
+		response.Messages = "Gym tidak ditemukan"
+		response.Data = nil
+		return response
 	}
 
+	gym, err := service.gymRepo.GetGymById(parsedUUID)
+	if err != nil {
+		response.StatusCode = 500
+		response.Messages = "Gym tidak ditemukan"
+		response.Data = nil
+		return response
+	}
 	usedCode := models.UsedCode{
+		IdGym:   gym.IdGym,
 		KodeGym: gymKode,
 		IdUser:  user.IdUser,
 	}
@@ -145,6 +190,11 @@ func (service *authService) Register(registerRequest utils.UserRequest, gymKode 
 	}
 	response.StatusCode = 200
 	response.Messages = "success"
+	response.Data = map[string]interface{}{
+		"accessToken":  accessToken,
+		"refreshToken": refreshtoken,
+		"role":         user.Role,
+	}
 	return response
 }
 
@@ -165,8 +215,22 @@ func (service *authService) GetLoggedInUser(bearerToken string) utils.Response {
 		names := strings.Split(user.Fullname, " ")
 		firstname := names[0]
 		lastname := names[1]
-
+		KodeGym, err := service.usedCodeRepo.GetusedCodeByIdUser(user.IdUser)
+		if err != nil {
+			response.StatusCode = 500
+			response.Messages = "Kode gym tidak ditemukan"
+			response.Data = nil
+			return response
+		}
+		Gym, err := service.gymRepo.GetGymById(KodeGym.IdGym)
+		if err != nil {
+			response.StatusCode = 500
+			response.Messages = "Gym tidak ditemukan"
+			response.Data = nil
+			return response
+		}
 		response.Data = map[string]interface{}{
+			"idUser":       user.IdUser,
 			"firstName":    firstname,
 			"lastName":     lastname,
 			"email":        user.Email,
@@ -177,6 +241,10 @@ func (service *authService) GetLoggedInUser(bearerToken string) utils.Response {
 			"umur":         user.Umur,
 			"beratBadan":   user.BeratBadan,
 			"role":         user.Role,
+			"foto":         user.FotoUrl,
+			"noTelepon":    user.NoTelepon,
+			"KodeGym":      KodeGym.KodeGym,
+			"Gym":          Gym.NamaGym,
 		}
 		return response
 	} else {
@@ -194,5 +262,10 @@ type AuthService interface {
 }
 
 func NewAuthService(db *gorm.DB) AuthService {
-	return &authService{authRepo: repositories.NewDBUserRepository(db)}
+	return &authService{
+		authRepo:     repositories.NewDBUserRepository(db),
+		usedCodeRepo: repositories.NewDBUsedCodeRepository(db),
+		tokenRepo:    repositories.NewDBTokenRepository(db),
+		gymRepo:      repositories.NewDBGymRepository(db),
+	}
 }
