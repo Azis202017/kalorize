@@ -9,8 +9,10 @@ import '../theme/font.dart';
 class ProfileWidget extends StatelessWidget {
   final String name;
   final XFile? foto;
+  final String image;
   final String kodeGym;
   final String namaGym;
+  final bool isLoading;
   final void Function()? onPressed;
   const ProfileWidget({
     super.key,
@@ -19,6 +21,8 @@ class ProfileWidget extends StatelessWidget {
     required this.namaGym,
     this.foto,
     this.onPressed,
+    this.image = "",
+    this.isLoading = true,
   });
 
   @override
@@ -34,22 +38,28 @@ class ProfileWidget extends StatelessWidget {
               height: 120,
               child: Stack(
                 children: [
-                  foto != null
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                            120,
-                          ),
-                          child: Image.file(
-                            width: 120,
-                            height: 120,
-                            File(
-                              foto?.path ?? "",
-                            ),
-                            fit: BoxFit.cover,
-                          ),
+                  image.isEmpty
+                      ? Image.asset(
+                          'assets/img/default.png',
+                          width: 120,
+                          height: 120,
+                          fit: BoxFit.cover,
                         )
-                      : Image.asset(
-                          'assets/img/default_profile.png',
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(120),
+                          child: foto != null
+                              ? Image.file(
+                                  File(foto!.path),
+                                  width: 120,
+                                  height: 120,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.network(
+                                  image,
+                                  width: 120,
+                                  height: 120,
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                   Align(
                     alignment: Alignment.bottomRight,
