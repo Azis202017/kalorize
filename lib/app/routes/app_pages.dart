@@ -6,7 +6,7 @@ import '../modules/change_profile/bindings/change_profile_binding.dart';
 import '../modules/change_profile/views/change_profile_view.dart';
 import '../modules/detail_food/bindings/detail_food_binding.dart';
 import '../modules/detail_food/views/detail_food_view.dart';
-import '../modules/home/bindings/home_binding.dart';
+import '../modules/home/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
@@ -30,7 +30,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.SPLASH_SCREEN;
 
   static final routes = [
     GetPage(

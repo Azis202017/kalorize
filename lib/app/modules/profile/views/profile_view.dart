@@ -32,13 +32,23 @@ class ProfileView extends GetView<ProfileController> {
                             height: 72,
                           ),
                           ProfileWidget(
+                            image: controller.user?.foto ?? "" ,
                             name:
                                 '${controller.user?.firstName} ${controller.user?.lastName}',
-                            kodeGym: controller.user?.kodeGym?.toUpperCase() ?? "",
+                            kodeGym:
+                                controller.user?.kodeGym?.toUpperCase() ?? "",
                             namaGym: '${controller.user?.gym}',
                             onPressed: controller.getFoto,
                             foto: controller.image,
+                            isLoading: controller.isLoading,
                           ),
+                          // controller.image != null
+                          //     ? ElevatedButton(
+                          //         onPressed: controller.saveFoto,
+                          //         child: const Text(
+                          //           'Simpan Foto',
+                          //         ))
+                          //     : const SizedBox(),
                           const SizedBox(
                             height: 36,
                           ),
