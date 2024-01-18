@@ -47,25 +47,25 @@ https://drive.google.com/drive/folders/1Ak3KQOIQ9Vg4B1r9dA6YMl3yWdnaJtkk
 </a>
 ## Screenshots
 
-<img src="screenshot/onboarding1.png" width="1000" height="1000" alt="Onboarding Splash Screen">
+<img src="screenshot/onboarding1.png" width="1920" height="1920" alt="Onboarding Splash Screen">
 
-<img src="screenshot/onboarding1.png" width="1000" height="1000" alt="Onboarding 1">
-<img src="screenshot/onboarding2.png" width="1000" height="1000" alt="Onboarding 2">
-<img src="screenshot/onboarding3.png" width="1000" height="1000" alt="Onboarding 3">
+<img src="screenshot/onboarding1.png" width="1920" height="1920" alt="Onboarding 1">
+<img src="screenshot/onboarding2.png" width="1920" height="1920" alt="Onboarding 2">
+<img src="screenshot/onboarding3.png" width="1920" height="1920" alt="Onboarding 3">
 
-<img src="screenshot/login.png" width="1000" height="1000" alt="Login">
-<img src="screenshot/register.png" width="1000" height="1000" alt="Register">
-<img src="screenshot/biodata.jpeg" width="1000" height="1000" alt="Change Password">
-<img src="screenshot/how_much_gym.jpeg" width="1000" height="1000" alt="Change Password">
-<img src="screenshot/target.jpeg" width="1000" height="1000" alt="Change Password">
-<img src="screenshot/success_questionare.jpeg" width="1000" height="1000" alt="Change Password">
-<img src="screenshot/failed_questionare.jpeg" width="1000" height="1000" alt="Change Password">
-<img src="screenshot/home.jpeg" width="1000" height="1000" alt="Home Page">
-<img src="screenshot/detail_food.jpeg" width="1000" height="1000" alt="Home Page">
+<img src="screenshot/login.png" width="1920" height="1920" alt="Login">
+<img src="screenshot/register.png" width="1920" height="1920" alt="Register">
+<img src="screenshot/biodata.jpeg" width="1920" height="1920" alt="Change Password">
+<img src="screenshot/how_much_gym.jpeg" width="1920" height="1920" alt="Change Password">
+<img src="screenshot/target.jpeg" width="1920" height="1920" alt="Change Password">
+<img src="screenshot/success_questionare.jpeg" width="1920" height="1920" alt="Change Password">
+<img src="screenshot/failed_questionare.jpeg" width="1920" height="1920" alt="Change Password">
+<img src="screenshot/home.jpeg" width="1920" height="1920" alt="Home Page">
+<img src="screenshot/detail_food.jpeg" width="1920" height="1920" alt="Home Page">
 
-<img src="screenshot/profile.png" width="1000" height="1000" alt="Change Password">
-<img src="screenshot/ubah_profile.png" width="1000" height="1000" alt="Change Profile">
-<img src="screenshot/password.png" width="1000" height="1000" alt="Change Password">
+<img src="screenshot/profile.png" width="1920" height="1920" alt="Change Password">
+<img src="screenshot/ubah_profile.png" width="1920" height="1920" alt="Change Profile">
+<img src="screenshot/password.png" width="1920" height="1920" alt="Change Password">
 
 # Running Echo Framework Application in Golang
 
