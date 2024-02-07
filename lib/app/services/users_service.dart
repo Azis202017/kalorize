@@ -18,10 +18,10 @@ class UserService {
         Uri.parse('$apiUrl/user'),
         headers: {'Authorization': 'Bearer ${storage.read('token')}'},
       );
+      print(response.body);
       if (response.statusCode == 200) {
         return UserModel.fromJson(jsonDecode(response.body)['data']);
       }
-      print(storage.read('token'));
       return null;
     } catch (e) {
       return throw Exception(e);
@@ -92,13 +92,12 @@ class UserService {
       request.fields['alias'] = "$alias";
 
       final response = await request.send();
-      List<int> bytes = await response.stream.toBytes();
-      String responseBody = utf8.decode(bytes);
-      print(responseBody);
+      // List<int> bytes = await response.stream.toBytes();
+      // String responseBody = utf8.decode(bytes);
 
-      // if (response.statusCode == 200) {
-      //   return true;
-      // }
+      if (response.statusCode == 200) {
+        return true;
+      }
       return false;
     } catch (e) {
       throw Exception(e);
