@@ -20,13 +20,14 @@ class FoodRecommendationService {
       'target': recommendationInput.target,
     };
     final response = await post(
-      Uri.parse(mlUrlTF),
+      Uri.parse(mlUrl),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
       body: jsonEncode(body),
     );
+    print(response.body);
     if (response.statusCode == 200) {
       return RecommendationFood.fromJson(jsonDecode(response.body));
     }
