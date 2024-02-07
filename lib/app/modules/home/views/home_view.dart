@@ -33,6 +33,7 @@ class _HomeViewState extends State<HomeView> {
                 body: RefreshIndicator(
                   onRefresh: () async {
                     controller.getUser();
+                   
                   },
                   child: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
