@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:kalorize/app/helpers/alert_error.dart';
 import 'package:kalorize/app/helpers/alert_loading.dart';
 import 'package:kalorize/app/services/questionare_service.dart';
 
@@ -199,6 +200,11 @@ class QuestionareController extends GetxController {
           arguments: {"isSuccess": isSuccessfullFillQuestionare},
         );
       }
+    } else {
+      alertError(
+        title: 'Terjadi Kesalahan',
+        subtitle: 'User tidak ditemukan',
+      );
     }
   }
 
