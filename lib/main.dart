@@ -20,10 +20,12 @@ void main() async{
   await initializeDateFormatting('id_ID', null).then(
     (_) => runApp(
       GetMaterialApp(
+        
         title: "Kalorize",
         initialRoute: AppPages.INITIAL,
         theme: themeData,
         getPages: AppPages.routes,
+        
       ),
     ),
   );

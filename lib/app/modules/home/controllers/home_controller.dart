@@ -59,7 +59,7 @@ class HomeController extends GetxController {
     update();
   }
 
-  void getBreakfastFood() async {
+  Future<void> getBreakfastFood() async {
     RecommendationInput recommendationInput = RecommendationInput(
       age: user?.umur ?? 0,
       gender: user?.jenisKelamin ?? 0,

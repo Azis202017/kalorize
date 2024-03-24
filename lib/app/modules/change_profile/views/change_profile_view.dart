@@ -7,7 +7,7 @@ import 'package:kalorize/app/shared/widgets/text_input.dart';
 import '../controllers/change_profile_controller.dart';
 
 class ChangeProfileView extends GetView<ChangeProfileController> {
-  const ChangeProfileView({Key? key}) : super(key: key);
+  const ChangeProfileView({super.key});
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChangeProfileController>(

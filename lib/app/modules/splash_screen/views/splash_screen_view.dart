@@ -11,14 +11,14 @@ import '../../../routes/app_pages.dart';
 import '../controllers/splash_screen_controller.dart';
 
 class SplashScreenView extends GetView<SplashScreenController> {
-  const SplashScreenView({Key? key}) : super(key: key);
+  const SplashScreenView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SplashScreenController>(
       initState: (_) {
         Timer(const Duration(seconds: 3), () {
-          Get.offAndToNamed(Routes.ONBOARDING);
+         controller.checkOnboardingStatus();
         });
       },
       builder: (_) {

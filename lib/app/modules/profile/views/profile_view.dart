@@ -9,7 +9,7 @@ import '../../../routes/app_pages.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
-  const ProfileView({Key? key}) : super(key: key);
+  const ProfileView({super.key});
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(builder: (context) {
@@ -32,7 +32,7 @@ class ProfileView extends GetView<ProfileController> {
                             height: 72,
                           ),
                           ProfileWidget(
-                            image: controller.user?.foto ?? "" ,
+                            image: controller.user?.foto ?? "",
                             name:
                                 '${controller.user?.firstName} ${controller.user?.lastName}',
                             kodeGym:
@@ -42,20 +42,14 @@ class ProfileView extends GetView<ProfileController> {
                             foto: controller.image,
                             isLoading: controller.isLoading,
                           ),
-                          // controller.image != null
-                          //     ? ElevatedButton(
-                          //         onPressed: controller.saveFoto,
-                          //         child: const Text(
-                          //           'Simpan Foto',
-                          //         ))
-                          //     : const SizedBox(),
                           const SizedBox(
                             height: 36,
                           ),
                           ListTileProfile(
                             icon: 'assets/img/change_profile.png',
                             title: 'Ubah Profile',
-                            onTap: () => Get.toNamed(Routes.CHANGE_PROFILE),
+                            onTap: () => Get.toNamed(Routes.CHANGE_PROFILE)
+                                ?.then((_) => controller.getUserData()),
                           ),
                           ListTileProfile(
                             icon: 'assets/img/lock.png',

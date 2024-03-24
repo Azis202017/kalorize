@@ -22,21 +22,7 @@ class OnboardingController extends GetxController {
     subtitle = "Solusi terbaik agar kamu tidak bingung dalam mengatur diet";
   }
 
-  @override
-  void onReady() {
-    checkOnboardingStatus();
-    super.onReady();
-  }
 
-  Future<void> checkOnboardingStatus() async {
-    final box = GetStorage();
-
-    bool onboardingCompleted = box.read('onboarding_completed') ?? false;
-
-    if (onboardingCompleted) {
-      Get.offAllNamed(Routes.LOGIN);
-    }
-  }
 
   void updateContent(int index) {
     currentPage = index;

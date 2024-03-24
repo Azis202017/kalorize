@@ -1,16 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:kalorize/app/helpers/alert_error.dart';
 import 'package:kalorize/app/helpers/alert_loading.dart';
 import 'package:kalorize/app/services/questionare_service.dart';
 
-import '../../../data/model/user_model.dart';
 import '../../../routes/app_pages.dart';
 import '../../../services/input/questionare_input.dart';
-import '../../../services/users_service.dart';
 
 class QuestionareController extends GetxController {
-  UserModel? user = UserModel();
+  String user = Get.arguments['userId'];
   String umur = "";
   String beratBadan = "";
   String tinggiBadan = "";
@@ -177,36 +174,29 @@ class QuestionareController extends GetxController {
   }
 
   void saveQuestionare() async {
-    if (user != null) {
-      QuestionareInput questionareInput = QuestionareInput(
-        idUser: user?.idUser ?? "",
-        umur: int.parse(umur),
-        beratBadan: int.parse(beratBadan),
-        frekuensiGym: currentFrequencyGym,
-        jenisKelamin: currentGender,
-        targetKalori: currentTarget,
-        tinggiBadan: int.parse(tinggiBadan),
-      );
-      alertLoading();
-      bool isSuccessfullFillQuestionare = await QuestionareService()
-          .fillQuestion(questionareInput: questionareInput);
-      Get.back();
-      if (isSuccessfullFillQuestionare) {
-        Get.offAllNamed(Routes.AFTER_QUESTIONARE,
-            arguments: {"isSuccess": isSuccessfullFillQuestionare});
-      } else {
-        Get.offAllNamed(
-          Routes.AFTER_QUESTIONARE,
-          arguments: {"isSuccess": isSuccessfullFillQuestionare},
-        );
-      }
+    QuestionareInput questionareInput = QuestionareInput(
+      idUser: user ,
+      umur: int.parse(umur),
+      beratBadan: int.parse(beratBadan),
+      frekuensiGym: currentFrequencyGym,
+      jenisKelamin: currentGender,
+      targetKalori: currentTarget,
+      tinggiBadan: int.parse(tinggiBadan),
+    );
+    alertLoading();
+    bool isSuccessfullFillQuestionare = await QuestionareService()
+        .fillQuestion(questionareInput: questionareInput);
+    Get.back();
+    if (isSuccessfullFillQuestionare) {
+      Get.offAllNamed(Routes.AFTER_QUESTIONARE,
+          arguments: {"isSuccess": isSuccessfullFillQuestionare});
     } else {
-      alertError(
-        title: 'Terjadi Kesalahan',
-        subtitle: 'User tidak ditemukan',
+      Get.offAllNamed(
+        Routes.AFTER_QUESTIONARE,
+        arguments: {"isSuccess": isSuccessfullFillQuestionare},
       );
     }
-  }
+    }
 
   @override
   void onClose() {
@@ -235,15 +225,6 @@ class QuestionareController extends GetxController {
     }
   }
 
-  Future<void> getUserData() async {
-    user = await UserService().fetchUserData();
-    print(user);
-    update();
-  }
 
-  @override
-  void onInit() async {
-    super.onInit();
-    await getUserData();
-  }
+
 }

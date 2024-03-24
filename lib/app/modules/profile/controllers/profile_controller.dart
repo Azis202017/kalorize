@@ -41,9 +41,7 @@ class ProfileController extends GetxController {
   }
 
   void getFoto() async {
-    isLoading = true;
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    isLoading = true;
     update();
     bool isSuccesFotoSave = await UserService().changeFoto(imageFile: image, alias: 'foto');
     isLoading = false;

@@ -104,19 +104,13 @@ class ChangeProfileController extends GetxController {
     alertLoading();
     bool isChangeProfileSuccess = await UserService().changeProfile(
       changeProfileInput: changeProfileInput,
-
     );
     Get.back();
-    if(isChangeProfileSuccess) {
-      Get.offAllNamed(Routes.LOGIN);
-      storage.remove('token');
+    if (isChangeProfileSuccess) {
+      Get.back();
       alertSuccess(title: 'Berhasil', subtitle: 'Ganti Profile Berhasil');
-    }else {
+    } else {
       alertSuccess(title: 'Gagal', subtitle: 'Ganti Profile Gagal');
-
     }
   }
- 
-
-
 }

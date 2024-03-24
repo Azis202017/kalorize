@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:kalorize/app/constant/global.dart';
 import 'package:kalorize/app/services/input/login_input.dart';
@@ -45,10 +46,15 @@ class AuthService {
         body: jsonEncode(body),
         headers: headers,
       );
-      print(response.body);
+      print(json.decode(response.body)['data']['accessToken']);
+
       if (response.statusCode == 200) {
-        String token = json.decode(response.body)['data']['refreshToken'];
+        String id = json.decode(response.body)['data']['userId'];
+        String token = json.decode(response.body)['data']['accessToken'];
+        storage.write('userId', id);
         storage.write('token', token);
+
+        // print("token $token");
         return true;
       }
       return false;

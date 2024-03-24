@@ -21,32 +21,33 @@ class ListOfFoodBreakfastCard extends StatelessWidget {
     return SizedBox(
       height: 280,
       child: ListView.builder(
-          itemCount: length,
-          clipBehavior: Clip.none,
-          scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.only(
-            right: 12,
-          ),
-          itemBuilder: (_, index) {
-            var data = food?.breakfast?[index];
-            return GestureDetector(
-              onTap: () => Get.toNamed(
-                Routes.DETAIL_FOOD,
-                arguments: {
-                  'food': data,
-                },
-              ),
-              child: FoodCard(
-                name: data?.nama ?? "",
-                calori: data?.kalori ?? 0,
-                protein: data?.protein ?? 0,
-                onPressed: () => onPressed?.call(data!),
-                image: data?.foto ?? "",
-                itemId: data?.id ?? 0,
-                mealType: "breakfast",
-              ),
-            );
-          }),
+        itemCount: length,
+        clipBehavior: Clip.none,
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.only(
+          right: 12,
+        ),
+        itemBuilder: (_, index) {
+          var data = food?.breakfast?[index];
+          return GestureDetector(
+            onTap: () => Get.toNamed(
+              Routes.DETAIL_FOOD,
+              arguments: {
+                'food': data,
+              },
+            ),
+            child: FoodCard(
+              name: data?.nama ?? "",
+              calori: data?.kalori ?? 0,
+              protein: data?.protein ?? 0,
+              onPressed: () => onPressed?.call(data!),
+              image: data?.foto ?? "",
+              itemId: data?.id ?? 0,
+              mealType: "breakfast",
+            ),
+          );
+        },
+      ),
     );
   }
 }

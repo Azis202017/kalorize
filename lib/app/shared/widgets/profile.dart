@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kalorize/app/shared/theme/color.dart';
@@ -54,11 +55,16 @@ class ProfileWidget extends StatelessWidget {
                                   height: 120,
                                   fit: BoxFit.cover,
                                 )
-                              : Image.network(
-                                  image,
+                              : CachedNetworkImage(
+                                  imageUrl: image,
                                   width: 120,
                                   height: 120,
                                   fit: BoxFit.cover,
+                                  progressIndicatorBuilder:
+                                      (context, url, downloadProgress) =>
+                                          CircularProgressIndicator(
+                                    value: downloadProgress.progress,
+                                  ),
                                 ),
                         ),
                   Align(

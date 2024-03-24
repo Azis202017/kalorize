@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../modules/home/controllers/home_controller.dart';
 import '../../../routes/app_pages.dart';
 import '../../theme/font.dart';
 import '../full_size_button.dart';
@@ -10,6 +11,7 @@ class SuccessQuestionare extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final HomeController successController = Get.put(HomeController());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +36,16 @@ class SuccessQuestionare extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: PrimaryButton(
             title: 'Mulai',
-            onPressed: () => Get.offAllNamed(Routes.HOME),
+            onPressed: () async{
+              await successController.getBreakfastFood();
+              successController.currentCalories = 0;
+              successController.currentProtein = 0;
+              
+              Get.offAllNamed(
+                Routes.HOME,
+              );
+
+            },
           ),
         ),
       ],

@@ -29,7 +29,6 @@ class FoodCard extends StatelessWidget {
     final int? selectedItemId =
         Get.find<HomeController>().selectedItems[mealType];
     final bool isSelected = (itemId == selectedItemId);
-    print(isSelected);
     return Container(
       width: 148,
       margin: const EdgeInsets.only(

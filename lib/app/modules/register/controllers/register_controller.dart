@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:kalorize/app/helpers/alert_error.dart';
 import 'package:kalorize/app/helpers/alert_success.dart';
 import 'package:kalorize/app/services/auth_service.dart';
@@ -123,15 +124,16 @@ class RegisterController extends GetxController {
         subtitle: "Tunggu beberapa saat lagi",
       );
       clearForm();
-
-      Get.offAllNamed(Routes.QUESTIONARE);
+      print(GetStorage().read('userId'));
+      Get.offAllNamed(Routes.QUESTIONARE, arguments: {
+        'userId': GetStorage().read('userId'),
+      });
     } else {
       alertError(
         title: "Yahh gagal melakukan register!",
         subtitle: "Kode gym sudah terpakai",
       );
     }
-    
   }
 
   void clearForm() {

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../theme/font.dart';
@@ -34,8 +35,13 @@ class HeaderProfile extends StatelessWidget {
                       'assets/img/default.png',
                       fit: BoxFit.cover,
                     )
-                  : Image.network(
-                      foto,
+                  : CachedNetworkImage(
+                      imageUrl: foto,
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) =>
+                              CircularProgressIndicator(
+                        value: downloadProgress.progress,
+                      ),
                       fit: BoxFit.cover,
                     ),
             ),

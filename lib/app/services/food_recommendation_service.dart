@@ -37,14 +37,10 @@ class FoodRecommendationService {
   Future<DetailFood?> getDetailFood({required int? id}) async {
     try {
       String url = "$apiUrl/makanan/$id";
-      var response = await get(
-        Uri.parse(url),
-        headers: {
-          'Authorization' : 'Bearer ${storage.read('token')}'
-        }
-      );
+      var response = await get(Uri.parse(url),
+          headers: {'Authorization': 'Bearer ${storage.read('token')}'});
       print(response.body);
-      if(response.statusCode == 200) {
+      if (response.statusCode == 200) {
         return DetailFood.fromJson(jsonDecode(response.body)['data']);
       }
       return null;
